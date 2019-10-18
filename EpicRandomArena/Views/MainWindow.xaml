@@ -1,0 +1,29 @@
+﻿<Window x:Class="EpicRandomArena.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EpicRandomArena"
+        xmlns:mvvm="clr-namespace:EpicRandomArena.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <mvvm:ApplicationViewModel x:Key="viewmodel" />
+    </Window.Resources>
+    <Window.DataContext>
+        <StaticResource ResourceKey="viewmodel"/>
+    </Window.DataContext>
+            <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.8*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="5">
+            <TextBlock x:Name="titleTextBox" Text="{Binding Source={StaticResource ResourceKey=viewmodel}, Path=Title}"/>
+            <TextBlock x:Name="pathTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=Image}"/>
+            <TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=IntelligencePoints}"/>
+            <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=StealthPoints}"/>
+           <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=StrengthPoints}"/>
+        </StackPanel>
+    </Grid>
+</Window>
