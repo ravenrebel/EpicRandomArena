@@ -4,9 +4,10 @@ namespace EpicRandomArena.Models
 {
     public class Attribute
     {
-        public Attribute(int points)
+        public Attribute(int points, Kinds kind)
         {
             Points = points;
+            Kind = kind;
             if (points < 1 || points > 15) throw new Exception("Invalid number of points.");
             else
             {
@@ -15,6 +16,8 @@ namespace EpicRandomArena.Models
                 else Level = Levels.Higth;
             }
         }
+
+       public Kinds Kind { get; }
 
         public Levels Level { get; }
 
@@ -25,6 +28,13 @@ namespace EpicRandomArena.Models
             Low,
             Middle,
             Higth
+        }
+
+        public enum Kinds
+        {
+            Stealth,
+            Strength,
+            Intelligence
         }
     }
 }

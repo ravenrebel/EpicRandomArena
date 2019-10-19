@@ -11,18 +11,16 @@ using System.Windows.Media;
 
 namespace EpicRandomArena.ViewModels
 {
-    public class ApplicationViewModel
+    public class ApplicationViewModel : INotifyPropertyChanged
     {
         private Card card;
+
+        private Models.Attribute selectedAttribute;
 
         public ApplicationViewModel()
         {
             Deck deck = new Deck();
-            deck.Add(new Card("Ilona",
-                "path",
-                new Models.Attribute(9),
-                new Models.Attribute(4),
-                new Models.Attribute(12)));
+            deck.Add(new Card("Ilona", "path", 9, 4, 12));
             card = deck[0];
         }
 
@@ -35,6 +33,36 @@ namespace EpicRandomArena.ViewModels
         public string StealthPoints => card.Stealth.Points.ToString();
 
         public string StrengthPoints => card.Strength.Points.ToString();
+
+        public Models.Attribute SelectedAttribute
+        {
+            get => selectedAttribute;
+            set
+            {
+                selectedAttribute = value;
+                OnPropertyChanged("SelectedAttribute");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private RelayCommand selectCommand;
+        public RelayCommand SelectCommand
+        {
+            get
+            {
+                return selectCommand ??
+                    (selectCommand = new RelayCommand(obj =>
+                    {
+
+                    }));
+            }
+        }
 
         // color that indicate lvl of attribute->func?
     }

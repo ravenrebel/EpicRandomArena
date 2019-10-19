@@ -23,6 +23,7 @@ namespace EpicRandomArena.Models
 
         public void Add(Card card) => cards.Add(card);
 
+        
         public IEnumerator GetEnumerator()
         {
             return ((IEnumerable)cards).GetEnumerator();
