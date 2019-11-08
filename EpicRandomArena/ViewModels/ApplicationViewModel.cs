@@ -22,6 +22,8 @@ namespace EpicRandomArena.ViewModels
         Deck playerDeck;
         Deck opponentDeck;
 
+        private bool isYourTurn = true;
+
         public ApplicationViewModel()
         {
             playerDeck = new Deck();
@@ -139,6 +141,16 @@ namespace EpicRandomArena.ViewModels
             }
         }
 
+        public bool IsYourTurn
+        {
+            get => isYourTurn;
+            set
+            {
+                isYourTurn = value;
+                OnPropertyChanged("IsYourTurn");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")
@@ -162,38 +174,29 @@ namespace EpicRandomArena.ViewModels
                             selectedAttribute = Models.Attribute.Kinds.Stealth;
                         else selectedAttribute = Models.Attribute.Kinds.Intelligence;
 
-                        try
-                        {
-                            TurnResult();
-
-                            if (playerDeck.Count() == 0)
-                            {
-                                Console.WriteLine("Game over");
-                            }
-                            else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1
-                                        && playerDeck.TopCard == opponentDeck.TopCard) Console.WriteLine("Friendship won");
-                            else if (opponentDeck.Count() == 0) Console.WriteLine("You won!");
-                            else
-                            {
-                                PlayerCardTitle = playerDeck.TopCard.Title;
-                                PlayerCardImage = playerDeck.TopCard.Image;
-                                PlayerCardIntelligencePoints = playerDeck.TopCard.Intelligence.Points.ToString();
-                                PlayerCardStealthPoints = playerDeck.TopCard.Stealth.Points.ToString();
-                                PlayerCardStrengthPoints = playerDeck.TopCard.Strength.Points.ToString();
-
-                                OpponentCardTitle = opponentDeck.TopCard.Title;
-                                OpponentCardImage = opponentDeck.TopCard.Image;
-                                OpponentCardIntelligencePoints = opponentDeck.TopCard.Intelligence.Points.ToString();
-                                OpponentCardStealthPoints = opponentDeck.TopCard.Stealth.Points.ToString();
-                                OpponentCardStrengthPoints = opponentDeck.TopCard.Strength.Points.ToString();
-                            }
-                        }
-                        catch (Exception) { }
+                        TurnResult();
+                        IsYourTurn = false;
                     }));
             }
         }
 
-        private void TurnResult()
+        private RelayCommand botSelectCommand;
+        public RelayCommand BotSelectCommand
+        {
+            get
+            {
+                return botSelectCommand ??
+                    (botSelectCommand = new RelayCommand(obj =>
+                    {
+                        selectedAttribute = AIChoice();
+
+                        TurnResult();
+                        IsYourTurn = true;
+                    }));
+            }
+        }
+
+        private void Turn()
         {
             currentPlayerCard = playerDeck.TopCard;
             currentOpponentCard = opponentDeck.TopCard;
@@ -216,6 +219,42 @@ namespace EpicRandomArena.ViewModels
                 playerDeck.RandomShove(currentPlayerCard);
                 opponentDeck.RandomShove(currentOpponentCard);
             }
+        }
+
+        private void TurnResult()
+        {
+            try
+            {
+                Turn();
+
+                if (playerDeck.Count() == 0)
+                {
+                    Console.WriteLine("Game over");
+                }
+                else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1
+                            && playerDeck.TopCard == opponentDeck.TopCard) Console.WriteLine("Friendship won");
+                else if (opponentDeck.Count() == 0) Console.WriteLine("You won!");
+                else
+                {
+                    PlayerCardTitle = playerDeck.TopCard.Title;
+                    PlayerCardImage = playerDeck.TopCard.Image;
+                    PlayerCardIntelligencePoints = playerDeck.TopCard.Intelligence.Points.ToString();
+                    PlayerCardStealthPoints = playerDeck.TopCard.Stealth.Points.ToString();
+                    PlayerCardStrengthPoints = playerDeck.TopCard.Strength.Points.ToString();
+
+                    OpponentCardTitle = opponentDeck.TopCard.Title;
+                    OpponentCardImage = opponentDeck.TopCard.Image;
+                    OpponentCardIntelligencePoints = opponentDeck.TopCard.Intelligence.Points.ToString();
+                    OpponentCardStealthPoints = opponentDeck.TopCard.Stealth.Points.ToString();
+                    OpponentCardStrengthPoints = opponentDeck.TopCard.Strength.Points.ToString();
+                }
+            }
+            catch (Exception) { }
+        }
+
+        private Models.Attribute.Kinds AIChoice()
+        {
+            return Models.Attribute.Kinds.Intelligence;
         }
     }
 }

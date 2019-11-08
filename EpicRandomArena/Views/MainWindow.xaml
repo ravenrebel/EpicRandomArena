@@ -25,14 +25,29 @@
             <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}"/>
            <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}"/>
             <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}" 
-                          Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
-                          CommandParameter="Strength"/>
+                           Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                           CommandParameter="Strength"
+                            IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn,UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}" 
-                          Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
-                          CommandParameter="Stealth"/>
+                           Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                           CommandParameter="Stealth"
+                            IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}" 
-                          Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
-                          CommandParameter="Intelligence"/>
+                           Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                           CommandParameter="Intelligence"
+                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Bot Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                    <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                    </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
