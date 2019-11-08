@@ -12,27 +12,29 @@ namespace EpicRandomArena.Models
     {
         private ObservableCollection<Card> cards;
 
+        public Card TopCard => cards[0];
+
         public Deck()
         {
             cards = new ObservableCollection<Card>();
+            //Random shuffle
         }
 
         public int Count() => cards.Count();
 
-        public void Remove(Card card) => cards.Remove(card);
+        public void Drop() => cards.RemoveAt(0);
 
         public void Add(Card card) => cards.Add(card);
 
-        
+        public void RandomShove(Card card)
+        {
+
+        }
+
         public IEnumerator GetEnumerator()
         {
             return ((IEnumerable)cards).GetEnumerator();
         }
 
-        public Card this[int i]
-        {
-            get => cards[i];
-            set => cards[i] = value;
-        }
     }
 }

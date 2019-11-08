@@ -19,11 +19,20 @@
             <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
         <StackPanel Margin="5">
-            <TextBlock x:Name="titleTextBox" Text="{Binding Source={StaticResource ResourceKey=viewmodel}, Path=Title}"/>
-            <TextBlock x:Name="pathTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=Image}"/>
-            <TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=IntelligencePoints}"/>
-            <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=StealthPoints}"/>
-           <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=StrengthPoints}"/>
+            <TextBlock x:Name="titleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardTitle, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock x:Name="pathTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardImage}"/>
+            <TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}"/>
+            <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}"/>
+           <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}"/>
+            <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}" 
+                          Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                          CommandParameter="Strength"/>
+            <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}" 
+                          Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                          CommandParameter="Stealth"/>
+            <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}" 
+                          Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                          CommandParameter="Intelligence"/>
         </StackPanel>
     </Grid>
 </Window>

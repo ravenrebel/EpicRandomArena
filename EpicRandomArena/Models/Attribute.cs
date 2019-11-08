@@ -19,9 +19,9 @@ namespace EpicRandomArena.Models
 
        public Kinds Kind { get; }
 
-        public Levels Level { get; }
+        public Levels Level { get; set; }
 
-        public int Points { get; }
+        public int Points { get; set; }
 
         public enum Levels
         {

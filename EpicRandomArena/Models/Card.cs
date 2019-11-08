@@ -13,15 +13,15 @@ namespace EpicRandomArena.Models
             Intelligence = new Attribute(intelligence, Kinds.Intelligence);
         }
 
-        public string Title { get; }
+        public string Title { get; set; }
 
-        public string Image { get; }
+        public string Image { get; set; }
 
-        public Attribute Stealth { get; }
+        public Attribute Stealth { get; set; }
 
-        public Attribute Strength { get; }
+        public Attribute Strength { get; set; }
 
-        public Attribute Intelligence { get; }
+        public Attribute Intelligence { get; set; }
 
         public Attribute Attribute(Kinds attributeKind)
         {
@@ -30,9 +30,8 @@ namespace EpicRandomArena.Models
             else return Intelligence;
         }
 
-        public bool IsGreater(Card other, Attribute attribute)
+        public bool IsGreater(Card other, Kinds kind)
         {
-            Kinds kind = attribute.Kind;
             Attribute a1 = Attribute(kind);
             Attribute a2 = other.Attribute(kind);
             if (a1.Level == a2.Level) return (a1.Points > a2.Points) ? true : false;
