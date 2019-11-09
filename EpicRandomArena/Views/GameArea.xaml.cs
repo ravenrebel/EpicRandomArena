@@ -15,22 +15,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EpicRandomArena.ViewModels;
 
-namespace EpicRandomArena
+namespace EpicRandomArena.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Interaction logic for GameArea.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameArea : Window
     {
-        public MainWindow()
+        public GameArea()
         {
             InitializeComponent();
-        }
-
-        private void GameButton_onClick(object sender, RoutedEventArgs e)
-        {
-            var gamearea = new EpicRandomArena.Views.GameArea();
-            gamearea.ShowDialog();
         }
     }
 }
