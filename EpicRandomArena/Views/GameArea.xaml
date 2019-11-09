@@ -5,81 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EpicRandomArena.Views"
         xmlns:mvvm="clr-namespace:EpicRandomArena.ViewModels"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        Title="Epick Random Arena" Height="720" Width="1280" >
     <Page.Resources>
         <mvvm:ApplicationViewModel x:Key="viewmodel" />
         <Style x:Key="AttributesButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
-            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="Regular" />
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Width" Value="155"/>
+            <Setter Property="Width" Value="110"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Margin" Value="10 10"/>
-            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="10 5"/>
+            <Setter Property="Height" Value="25"/>
             <Setter Property="BorderBrush" Value="#6aedf6"/>
             <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
         </Style>
         <Style x:Key="CardStyle" TargetType="StackPanel">
-            <Setter Property="Width" Value="217"/>
+            <Setter Property="Width" Value="144"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="42.5"/>
-            <Setter Property="Height" Value="385"/>
+            <Setter Property="Margin" Value="30"/>
+            <Setter Property="Height" Value="256"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/CardFace.png"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
     <Page.DataContext>
         <StaticResource ResourceKey="viewmodel"/>
-    </Page.DataContext>
     <Grid>
-            <Grid.Background>
-                <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/GameArea.png"/>
-            </Grid.Background>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*" />
-                <ColumnDefinition Width="*" MinWidth="300"/>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="*" MinWidth="300"/>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="*" MinWidth="300"/>
-                <ColumnDefinition Width="0.3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" MinHeight="500"/>
-                <RowDefinition Height="*" MinHeight="500"/>
-            </Grid.RowDefinitions>
-            <Canvas Grid.Column="3" Grid.Row="1">
-                <StackPanel Style="{StaticResource CardStyle}" >
-                    <StackPanel.Background>
-                        <ImageBrush/>
-                    </StackPanel.Background>
+        <Grid.Background>
+            <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/GameArea.png"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="0.3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="320"/>
+            <RowDefinition Height="*" MinHeight="320"/>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Column="3" Grid.Row="1">
+            <StackPanel Style="{StaticResource CardStyle}" >
+                <StackPanel>
                     <TextBlock x:Name="titleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardTitle, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel>
                     <TextBlock x:Name="pathTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardImage}"/>
-                    <TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}"/>
-                    <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}"/>
-                    <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}"/>
-                    <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}" 
-                           Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
-                           CommandParameter="Strength"
-                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn,UpdateSourceTrigger=PropertyChanged}"
-                           Style="{StaticResource AttributesButtonStyle}"/>
-                    <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}" 
-                           Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                </StackPanel>
+                <!--<TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}"/>
+            <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}"/>
+            <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}"/>-->
+                <StackPanel>
+                    <Button  CommandParameter="Strength" Style="{StaticResource AttributesButtonStyle}"
+                    Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
+                    <Button Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Stealth"
-                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource AttributesButtonStyle}"/>
-                    <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}" 
-                           Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
+                    <Button Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Intelligence"
-                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource AttributesButtonStyle}"/>
                 </StackPanel>
-            </Canvas>
-            <StackPanel Grid.Column="6" Grid.RowSpan="2">
-                <Button Content="Bot Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
+            </StackPanel>
+        </Canvas>
+        <StackPanel Grid.Column="6" Grid.RowSpan="2">
+            <Button Content="Bot Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
                                      Value="true">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
@@ -89,4 +93,5 @@
                 </Button>
             </StackPanel>
         </Grid>
+    </Page.DataContext>
 </Page>
