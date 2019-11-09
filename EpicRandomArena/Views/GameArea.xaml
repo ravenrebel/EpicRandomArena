@@ -9,14 +9,23 @@
         Title="Epick Random Arena" Height="1080" Width="1920" >
     <Window.Resources>
         <mvvm:ApplicationViewModel x:Key="viewmodel" />
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <Style x:Key="AttributesButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
             <Setter Property="FontSize" Value="24" />
             <Setter Property="FontWeight" Value="Regular" />
             <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="155"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="10 10"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="BorderBrush" Value="#6aedf6"/>
+            <Setter Property="BorderThickness" Value="2"/>
         </Style>
-        <Style x:Key="StrengthButton" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
-            <Setter Property="Background" Value="White"/>
+        <Style x:Key="CardStyle" TargetType="StackPanel">
+            <Setter Property="Width" Value="217"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="42.5"/>
+            <Setter Property="Height" Value="385"/>
         </Style>
     </Window.Resources>
     <Window.DataContext>
@@ -37,11 +46,11 @@
             <ColumnDefinition Width="0.3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" MinHeight="533"/>
-            <RowDefinition Height="*" MinHeight="533"/>
+            <RowDefinition Height="*" MinHeight="500"/>
+            <RowDefinition Height="*" MinHeight="500"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Margin="5" Grid.Column="3" Grid.Row="1">
+        <Canvas Grid.Column="3" Grid.Row="1">
+            <StackPanel Style="{StaticResource CardStyle}" >
             <StackPanel.Background>
                 <ImageBrush/>
             </StackPanel.Background>
@@ -54,16 +63,21 @@
                            Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
                            CommandParameter="Strength"
                            IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn,UpdateSourceTrigger=PropertyChanged}"
-                           Style="{StaticResource StrengthButton}">
-            </Button>
+                           Style="{StaticResource AttributesButtonStyle}"/>
             <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}" 
                            Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
                            CommandParameter="Stealth"
-                            IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"/>
+                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource AttributesButtonStyle}"/>
             <Button Content="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}" 
                            Command="{Binding Source={StaticResource viewmodel}, Path=SelectCommand}"
                            CommandParameter="Intelligence"
-                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"/>
+                           IsEnabled="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource AttributesButtonStyle}"/>
+            
+        </StackPanel>
+        </Canvas>
+        <StackPanel Grid.Column="6" Grid.RowSpan="2">
             <Button Content="Bot Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
