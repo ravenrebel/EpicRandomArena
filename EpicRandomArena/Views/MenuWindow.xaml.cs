@@ -20,17 +20,21 @@ namespace EpicRandomArena
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuWindow : Window
     {
-        public MainWindow()
-        {
+        public MenuWindow()
+        { 
             InitializeComponent();
         }
 
-        private void GameButton_onClick(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            var gamearea = new EpicRandomArena.Views.GameArea();
-            gamearea.ShowDialog();
+            Close();
+        }
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            _NavigationFrame.Content = new Views.GameArea();
         }
     }
 }

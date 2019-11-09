@@ -20,7 +20,7 @@ namespace EpicRandomArena.Views
     /// <summary>
     /// Interaction logic for GameArea.xaml
     /// </summary>
-    public partial class GameArea : Window
+    public partial class GameArea : Page
     {
         public GameArea()
         {
