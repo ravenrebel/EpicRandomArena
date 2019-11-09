@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EpicRandomArena.Views"
         xmlns:mvvm="clr-namespace:EpicRandomArena.ViewModels"
         mc:Ignorable="d"
-        Title="Epick Random Arena" Height="720" Width="1280" >
+       Height="720" Width="1280" >
     <Page.Resources>
         <mvvm:ApplicationViewModel x:Key="viewmodel" />
         <Style x:Key="CardStyle" TargetType="StackPanel">
@@ -19,7 +19,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="AttributesButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
             <Setter Property="FontSize" Value="20" />
@@ -35,7 +34,6 @@
             <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
             <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
         </Style>
-        
         <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="20"/>
@@ -45,7 +43,6 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
-        
         <Style x:Key="FhotoStackPanelStyle" TargetType="Canvas">
             <Setter Property="Width" Value="110"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -57,31 +54,26 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Page.Resources>
-    <Page.DataContext>
-        
         <Style x:Key="AttributeStackPanelStyle" TargetType="StackPanel">
             <Setter Property="Height" Value="115"/>
             <Setter Property="Width" Value="144"/>
             <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        
         <Style x:Key="AttributeImageStackPanelStyle" TargetType="StackPanel" BasedOn="{StaticResource AttributeStackPanelStyle}">
             <Setter Property="Width" Value="30"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Orientation" Value="Vertical"/>
         </Style>
-
         <Style x:Key="AttributeButtonStackPanelStyle" TargetType="StackPanel" BasedOn="{StaticResource AttributeStackPanelStyle}">
             <Setter Property="Panel.VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Orientation" Value="Vertical"/>
         </Style>
-        
-    </Window.Resources>
-    <Window.DataContext>
+    </Page.Resources>
+    <Page.DataContext>
         <StaticResource ResourceKey="viewmodel"/>
+    </Page.DataContext>
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/GameArea.png"/>
@@ -102,11 +94,11 @@
         <Canvas Grid.Column="3" Grid.Row="1">
             <StackPanel Style="{StaticResource CardStyle}" >
                 <StackPanel x:Name="TtlCrd">
-                    <TextBlock x:Name="titleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardTitle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TitleTextBlockStyle}"/>
+                    <TextBlock x:Name="TitleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardTitle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TitleTextBlockStyle}"/>
                 </StackPanel>
                 <StackPanel>
                 </StackPanel>
-            <!--<TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}"/>
+                <!--<TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}"/>
             <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}"/>
             <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}"/>-->
                 <Canvas x:Name="PhtCrd" Style="{StaticResource FhotoStackPanelStyle}">
@@ -118,13 +110,13 @@
                     <StackPanel x:Name="AtrbBtn" Style="{StaticResource AttributeButtonStackPanelStyle}">
                         <Button x:Name="Str" CommandParameter="Strength" Margin="0 10 0 5" Style="{StaticResource AttributesButtonStyle}"
                     Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
-                    <Button x:Name="Stl" Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
+                        <Button x:Name="Stl" Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Stealth"
                            Style="{StaticResource AttributesButtonStyle}"/>
-                    <Button x:Name="Int" Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}" 
+                        <Button x:Name="Int" Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Intelligence"
                            Style="{StaticResource AttributesButtonStyle}"/>
-                </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Canvas>
@@ -135,13 +127,12 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
                                      Value="true">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </StackPanel>
-        </Grid>
-    </Page.DataContext>
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+    </Grid>
 </Page>
