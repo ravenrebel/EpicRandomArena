@@ -111,5 +111,8 @@
     <Resource Include="Graphics\GameArea.png" />
     <Resource Include="Graphics\Menu.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\Ilona.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
