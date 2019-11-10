@@ -27,11 +27,11 @@ namespace EpicRandomArena.ViewModels
         public ApplicationViewModel()
         {
             playerDeck = new Deck();
-            playerDeck.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/Ilona.jpg", 9, 4, 12));
+            playerDeck.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/Ilona.png", 9, 4, 12));
             playerDeck.Add(new Card("Nastya", "path", 8, 1, 14));
 
             opponentDeck = new Deck();
-            opponentDeck.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/Ilona.jpg", 9, 4, 12));
+            opponentDeck.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/Ilona.png", 9, 4, 12));
             opponentDeck.Add(new Card("Batman", "path", 14, 9, 9));
 
             droppedCards = new List<Card>();

@@ -6,6 +6,22 @@
         xmlns:local="clr-namespace:EpicRandomArena"
         WindowStyle="None"
         WindowState="Maximized">
+    <Window.Resources>
+        <Style x:Key="MenuBtn" TargetType="Button">
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden">
         <Frame.Content>
             <Grid x:Name="LayoutGrid">
@@ -18,9 +34,9 @@
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="1" >
-                    <Button x:Name="PlayButton" Click="PlayButton_Click">Game</Button>
-                    <Button>Info</Button>
-                    <Button x:Name="ExitButton" Click="ExitButton_Click">Exit</Button>
+                    <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">Game</Button>
+                    <Button x:Name="InfoButton" Style="{StaticResource MenuBtn}">Info</Button>
+                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">Exit</Button>
                 </StackPanel>
             </Grid>   
         </Frame.Content>
