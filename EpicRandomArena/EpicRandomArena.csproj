@@ -59,11 +59,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
+    <Page Include="Views\ExitGameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameArea.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MenuWindow.xaml">
+    <Page Include="Views\InfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -72,11 +84,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\RelayCommand.cs" />
+    <Compile Include="Views\ExitGameWindow.xaml.cs">
+      <DependentUpon>ExitGameWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GameArea.xaml.cs">
       <DependentUpon>GameArea.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuWindow.xaml.cs">
-      <DependentUpon>MenuWindow.xaml</DependentUpon>
+    <Compile Include="Views\InfoPage.xaml.cs">
+      <DependentUpon>InfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

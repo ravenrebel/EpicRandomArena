@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EpicRandomArena.Views"
         xmlns:mvvm="clr-namespace:EpicRandomArena.ViewModels"
         mc:Ignorable="d"
-      MinWidth="1280" MinHeight="720">
+        MinWidth="1280" MinHeight="720">
     <Page.Resources>
         <mvvm:ApplicationViewModel x:Key="viewmodel" />
         <Style x:Key="CardStyle" TargetType="StackPanel">
@@ -160,6 +160,7 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Button x:Name="ExitGameButton" Click="ExitGameButton_Click">Exit Game</Button>
         </StackPanel>
     </Grid>
 </Page>

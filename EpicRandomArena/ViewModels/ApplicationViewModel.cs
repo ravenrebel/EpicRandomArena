@@ -250,7 +250,7 @@ namespace EpicRandomArena.ViewModels
                     OpponentCardStrengthPoints = opponentDeck.TopCard.Strength.Points.ToString();
                 }
             }
-            catch (Exception) { }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         private Models.Attribute.Kinds AIChoice()

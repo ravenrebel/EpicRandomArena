@@ -9,28 +9,20 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using EpicRandomArena.ViewModels;
 
 namespace EpicRandomArena.Views
 {
     /// <summary>
-    /// Interaction logic for GameArea.xaml
+    /// Interaction logic for InfoPage.xaml
     /// </summary>
-    public partial class GameArea : Page
+    public partial class InfoPage : Page
     {
-        public GameArea()
+        public InfoPage()
         {
             InitializeComponent();
-        }
-
-        private void ExitGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            ExitGameWindow exitGameWindow = new ExitGameWindow(Window.GetWindow(this));
-            exitGameWindow.Show();
         }
     }
 }
