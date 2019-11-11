@@ -41,9 +41,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="1" >
-                    <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">Game</Button>
-                    <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource MenuBtn}">Info</Button>
-                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">Exit</Button>
+                    <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">PLAY</Button>
+                    <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource MenuBtn}">INFO</Button>
+                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">EXIT</Button>
                 </StackPanel>
             </Grid>   
         </Frame.Content>

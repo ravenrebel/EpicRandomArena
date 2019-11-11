@@ -136,7 +136,7 @@
                     </StackPanel>
                     <StackPanel x:Name="AtrbBtn" Style="{StaticResource AttributeButtonStackPanelStyle}">
                         <Button x:Name="StrBtn" CommandParameter="Strength" Margin="0 10 0 5" Style="{StaticResource AttributesButtonStyle}"
-                    Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
+                           Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
                         <Button x:Name="StlBtn" Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Stealth"
                            Style="{StaticResource AttributesButtonStyle}"/>
@@ -163,7 +163,26 @@
             <Button x:Name="ExitGameButton" Click="ExitGameButton_Click">Exit Game</Button>
         </StackPanel>
         <Canvas Grid.ColumnSpan="3" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Visibility="Hidden" Content="YOU WIN" FontSize="200" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <Label FontSize="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerVictory, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                <Setter Property="Content" Value="YOU WON"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=OpponentVictory, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                    <Setter Property="Content" Value="YOU LOOSE"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=GameInADraw, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                <Setter Property="Content" Value="DEADLOCK"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
         </Canvas>
     </Grid>
 </Page>
