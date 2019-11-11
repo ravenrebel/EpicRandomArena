@@ -26,6 +26,7 @@ namespace EpicRandomArena.ViewModels
         private bool playerPositiveTurnResult = false;
         private bool evenTurnResult = false;
         private bool playerVictory = false;
+        private bool opponentVictory = false;
         private bool gameInADrow = false;
         private bool turnStart = false;
 
@@ -34,6 +35,8 @@ namespace EpicRandomArena.ViewModels
             playerDeck = new Deck();
             opponentDeck = new Deck();
             playerDroppedCards = new List<Card>();
+            currentPlayerCard = playerDeck.TopCard;
+            currentOpponentCard = opponentDeck.TopCard;
         }
 
         public string PlayerCardTitle
@@ -175,6 +178,15 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("PlayerVictory");
             }
         }
+        public bool OpponentVictory
+        {
+            get => opponentVictory;
+            set
+            {
+               opponentVictory = value;
+                OnPropertyChanged("OpponentVictory");
+            }
+        }
         public bool GameInADraw
         {
             get => gameInADrow;
@@ -278,10 +290,7 @@ namespace EpicRandomArena.ViewModels
             {
                 Turn();
 
-                if (playerDeck.Count() == 0)
-                {
-                    Console.WriteLine("Game over");
-                }
+                if (playerDeck.Count() == 0) OpponentVictory = true;
                 else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1
                             && playerDeck.TopCard == opponentDeck.TopCard) GameInADraw = true;
                 else if (opponentDeck.Count() == 0) PlayerVictory = true;
