@@ -11,7 +11,6 @@
         <mvvm:ApplicationViewModel x:Key="viewmodel" />
         <Style x:Key="CardStyle" TargetType="StackPanel">
             <Setter Property="Width" Value="144"/>
-            <Setter Property="Margin" Value="30"/>
             <Setter Property="Height" Value="256"/>
             <Setter Property="Background">
                 <Setter.Value>
@@ -19,6 +18,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="PlayerCardStyle" TargetType="StackPanel" BasedOn="{StaticResource CardStyle}">
+            <Setter Property="Margin" Value="30 40 30 50"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="OpponentCardStyle" TargetType="StackPanel" BasedOn="{StaticResource CardStyle}">
+            <Setter Property="Margin" Value="30 50 30 50"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        
         <Style x:Key="AttributesButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
             <Setter Property="FontSize" Value="20" />
@@ -34,6 +42,7 @@
             <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
             <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
         </Style>
+        
         <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Muriad Pro" />
             <Setter Property="FontSize" Value="18" />
@@ -46,17 +55,29 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
-        <Style x:Key="FhotoStackPanelStyle" TargetType="Canvas">
+
+        <Style x:Key="PhotoStackPanelStyle" TargetType="Canvas">
             <Setter Property="Width" Value="110"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Height" Value="122"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <Style x:Key="PleyerPhotoStackPanelStyle" TargetType="Canvas" BasedOn="{StaticResource PhotoStackPanelStyle}">
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush ImageSource="{Binding Source={StaticResource viewmodel}, Path=PlayerCardImage}"/>
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="OpponentPhotoStackPanelStyle" TargetType="Canvas" BasedOn="{StaticResource PhotoStackPanelStyle}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="{Binding Source={StaticResource viewmodel}, Path=OpponentCardImage}"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <Style x:Key="AttributeStackPanelStyle" TargetType="StackPanel">
             <Setter Property="Height" Value="115"/>
             <Setter Property="Width" Value="144"/>
@@ -82,9 +103,11 @@
             <Setter Property="Orientation" Value="Vertical"/>
         </Style>
     </Page.Resources>
+
     <Page.DataContext>
         <StaticResource ResourceKey="viewmodel"/>
     </Page.DataContext>
+
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/GameArea.png"/>
@@ -102,20 +125,24 @@
             <RowDefinition Height="*" MinHeight="320"/>
             <RowDefinition Height="*" MinHeight="320"/>
         </Grid.RowDefinitions>
-        <Canvas Grid.Column="3" Grid.Row="1">
-            <StackPanel Style="{StaticResource CardStyle}" >
+
+
+        <!-- Канва з карточкою бота повністю -->
+
+        <Canvas Grid.Column="3" Grid.Row="0">
+            <StackPanel Style="{StaticResource OpponentCardStyle}" >
                 <StackPanel x:Name="TtlCrd">
-                    <TextBlock x:Name="TitleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardTitle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TitleTextBlockStyle}"/>
+                    <TextBlock x:Name="TitleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=OpponentCardTitle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TitleTextBlockStyle}"/>
                 </StackPanel>
                 <StackPanel>
                 </StackPanel>
-                <!--<TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardIntelligencePoints}"/>
-            <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStealthPoints}"/>
-            <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardStrengthPoints}"/>-->
-                <Canvas x:Name="PhtCrd" Style="{StaticResource FhotoStackPanelStyle}">
-                    <!--<TextBlock x:Name="pathTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardImage}"/>-->
-                    <!--<Canvas Style="{StaticResource FhotoStackPanelStyle}"></Canvas>-->
-                </Canvas>
+
+                <!--<TextBlock x:Name="intelligenceTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=OpponentCardIntelligencePoints}"/>
+                <TextBlock x:Name="stealthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=OpponentStealthPoints}"/>
+                <TextBlock x:Name="strengthTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=OpponentStrengthPoints}"/>-->
+
+                <Canvas x:Name="PhtCrd" Style="{StaticResource OpponentPhotoStackPanelStyle}"></Canvas>
+                
                 <StackPanel x:Name="Atrb" Style="{StaticResource AttributeStackPanelStyle}">
                     <StackPanel x:Name="AtrbImg" Style="{StaticResource AttributeImageStackPanelStyle}">
                         <Label Name="StrImg" Style="{StaticResource AttributeImageLabelStyle}" Margin="5 10 0 5">
@@ -136,11 +163,54 @@
                     </StackPanel>
                     <StackPanel x:Name="AtrbBtn" Style="{StaticResource AttributeButtonStackPanelStyle}">
                         <Button x:Name="StrBtn" CommandParameter="Strength" Margin="0 10 0 5" Style="{StaticResource AttributesButtonStyle}"
-                           Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
-                        <Button x:Name="StlBtn" Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
+                    Content = "{Binding OpponentCardStrengthPoints, Source={StaticResource viewmodel}}"/>
+                        <Button x:Name="StlBtn" Content="{Binding OpponentCardStealthPoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Stealth"
                            Style="{StaticResource AttributesButtonStyle}"/>
-                        <Button x:Name="IntBtn" Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}" 
+                        <Button x:Name="IntBtn" Content="{Binding OpponentCardIntelligencePoints, Source={StaticResource viewmodel}}" 
+                           CommandParameter="Intelligence"
+                           Style="{StaticResource AttributesButtonStyle}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+
+
+        <!-- Канва з карточкою гравця повністю -->
+        <Canvas Grid.Column="3" Grid.Row="1">
+            <StackPanel Style="{StaticResource PlayerCardStyle}" >
+                <StackPanel x:Name="OpponentTtlCrd">
+                    <TextBlock x:Name="OpponentTitleTextBox" Text="{Binding Source={StaticResource viewmodel}, Path=PlayerCardTitle, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TitleTextBlockStyle}"/>
+                </StackPanel>
+                
+                <Canvas x:Name="OpponentPhtCrd" Style="{StaticResource PhotoStackPanelStyle}">
+
+                </Canvas>
+                <StackPanel x:Name="OpponentAtrb" Style="{StaticResource AttributeStackPanelStyle}">
+                    <StackPanel x:Name="OpponentAtrbImg" Style="{StaticResource AttributeImageStackPanelStyle}">
+                        <Label Name="OpponentStrImg" Style="{StaticResource AttributeImageLabelStyle}" Margin="5 10 0 5">
+                            <Label.Background>
+                                <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/StrSymbol.png"/>
+                            </Label.Background>
+                        </Label>
+                        <Label Name="OpponentStlImg" Style="{StaticResource AttributeImageLabelStyle}">
+                            <Label.Background >
+                                <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/StlSymbol.png"/>
+                            </Label.Background>
+                        </Label>
+                        <Label Name="OpponentIntImg" Style="{StaticResource AttributeImageLabelStyle}">
+                            <Label.Background>
+                                <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/IntSymbol.png"/>
+                            </Label.Background>
+                        </Label>
+                    </StackPanel>
+                    <StackPanel x:Name="OpponentAtrbBtn" Style="{StaticResource AttributeButtonStackPanelStyle}">
+                        <Button x:Name="OpponentStrBtn" CommandParameter="Strength" Margin="0 10 0 5" Style="{StaticResource AttributesButtonStyle}"
+                    Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
+                        <Button x:Name="OpponentStlBtn" Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
+                           CommandParameter="Stealth"
+                           Style="{StaticResource AttributesButtonStyle}"/>
+                        <Button x:Name="OpponentIntBtn" Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}" 
                            CommandParameter="Intelligence"
                            Style="{StaticResource AttributesButtonStyle}"/>
                     </StackPanel>
@@ -162,7 +232,8 @@
             </Button>
             <Button x:Name="ExitGameButton" Click="ExitGameButton_Click">Exit Game</Button>
         </StackPanel>
-        <Canvas Grid.ColumnSpan="3" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <!--Надпис результату гри -->        
+        <Canvas Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="200" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label.Style>
                     <Style TargetType="Label">
