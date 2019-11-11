@@ -5,15 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EpicRandomArena.Views"
         mc:Ignorable="d"
-        WindowStyle="None" Height="150" Width="400"
+        WindowStyle="None" Height="150" Width="200"
         WindowStartupLocation="CenterScreen"
-        Background="DarkViolet"
+        Background="Transparent"
         Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="ExitGameWindowButton" TargetType="Button">
+            <Setter Property="Margin" Value="0 0 0 10"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0, 1">
+                        <GradientStop Offset="0"  Color="#8dd6f8"/>
+                        <GradientStop Color="#56079c" Offset="0.25"/>
+                        <GradientStop Color="#350a60" Offset="0.5"/>
+                        <GradientStop Color="#56079c" Offset="0.75"/>
+                        <GradientStop Offset="1"  Color="#8dd6f8"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel>
-            <Button x:Name="ContinueButton" Click="ContinueButton_Click">Continue</Button>
-            <Button x:Name="ExitToMenuButton" Click="ExitToMenuButton_Click">Exit To Menu</Button>
-            <Button x:Name="ExitToDesktop" Click="ExitToDesktop_Click">Exit To Desktop</Button>
+            <Button x:Name="ContinueButton" Click="ContinueButton_Click" Style="{StaticResource ExitGameWindowButton}">Continue</Button>
+            <Button x:Name="ExitToMenuButton" Click="ExitToMenuButton_Click" Style="{StaticResource ExitGameWindowButton}">Exit To Menu</Button>
+            <Button x:Name="ExitToDesktop" Click="ExitToDesktop_Click" Style="{StaticResource ExitGameWindowButton}">
+                 Exit To Desktop</Button>
         </StackPanel>
     </Grid>
 </Window>

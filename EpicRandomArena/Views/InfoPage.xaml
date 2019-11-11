@@ -7,6 +7,9 @@
       mc:Ignorable="d" 
       MinWidth="1280" MinHeight="720">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/Info.png"/>
+        </Grid.Background>
+
     </Grid>
 </Page>

@@ -149,6 +149,12 @@
   <ItemGroup>
     <Resource Include="Graphics\Ilona.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Graphics\Info.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

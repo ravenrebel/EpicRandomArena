@@ -40,10 +40,18 @@
                     <RowDefinition Height="2*" MinHeight="300" />
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom">
+                    <Label MinHeight="150" Margin="0 25 0 0" MinWidth="300" MaxWidth="400">
+                        <Label.Background>
+                            <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/logo.png"/>
+                        </Label.Background>
+                    </Label>
+                    <Label Foreground="White" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="72" Content="EPIC RANDOM ARENA"></Label>
+                </StackPanel>
                 <StackPanel Grid.Row="1" >
-                    <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">Game</Button>
-                    <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource MenuBtn}">Info</Button>
-                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">Exit</Button>
+                    <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">PLAY</Button>
+                    <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource MenuBtn}">INFO</Button>
+                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">EXIT</Button>
                 </StackPanel>
             </Grid>   
         </Frame.Content>
