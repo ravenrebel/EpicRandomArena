@@ -8,14 +8,22 @@
     <Page.Resources>
         <Style x:Key="MenuBtn" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="50" />
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="MinWidth" Value="400"/>
+            <Setter Property="MaxWidth" Value="700"/>
             <Setter Property="FontWeight" Value="Regular" />
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Background">
                 <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
+                    <LinearGradientBrush StartPoint="0, 1">
+                        <GradientStop Offset="0"/>
+                        <GradientStop Color="White" Offset="0.4"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                        <GradientStop Color="White" Offset="0.6"/>
+                        <GradientStop Offset="1" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -28,9 +36,9 @@
                     <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/Menu.png"/>
                 </Grid.Background>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="2*" MinHeight="250" />
+                    <RowDefinition Height="2*" MinHeight="300" />
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="1" >
                     <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">Game</Button>
