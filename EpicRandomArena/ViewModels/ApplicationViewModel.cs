@@ -18,25 +18,22 @@ namespace EpicRandomArena.ViewModels
 
         private Models.Attribute.Kinds selectedAttribute;
 
-        List<Card> droppedCards;
+        List<Card> playerDroppedCards;
         Deck playerDeck;
         Deck opponentDeck;
 
         private bool isYourTurn = true;
+        private bool playerPositiveTurnResult = false;
+        private bool evenTurnResult = false;
+        private bool playerVictory = false;
+        private bool gameInADrow = false;
+        private bool turnStart = false;
 
         public ApplicationViewModel()
         {
             playerDeck = new Deck();
-            playerDeck.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/Ilona.png", 9, 4, 12));
-            playerDeck.Add(new Card("Nastya", "path", 8, 1, 14));
-
             opponentDeck = new Deck();
-            opponentDeck.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/Ilona.png", 9, 4, 12));
-            opponentDeck.Add(new Card("Batman", "path", 14, 9, 9));
-
-            droppedCards = new List<Card>();
-
-            currentPlayerCard = playerDeck.TopCard;
+            playerDroppedCards = new List<Card>();
         }
 
         public string PlayerCardTitle
@@ -151,6 +148,52 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("IsYourTurn");
             }
         }
+        public bool PlayerPositiveTurnResult
+        {
+            get => playerPositiveTurnResult;
+            set
+            {
+                playerPositiveTurnResult = value;
+                OnPropertyChanged("PlayerPositiveTurnResult");
+            }
+        }
+        public bool EvenTurnResult
+        {
+            get => evenTurnResult;
+            set
+            {
+               evenTurnResult = value;
+                OnPropertyChanged("EvenTurnResult");
+            }
+        }
+        public bool PlayerVictory
+        {
+            get => playerVictory;
+            set
+            {
+               playerVictory = value;
+                OnPropertyChanged("PlayerVictory");
+            }
+        }
+        public bool GameInADraw
+        {
+            get => gameInADrow;
+            set
+            {
+                gameInADrow = value;
+                OnPropertyChanged("GameInADraw");
+            }
+        }
+        public bool TurnStart
+        {
+            get => turnStart;
+            set
+            {
+                turnStart = value;
+                OnPropertyChanged("TurnStart");
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -167,6 +210,7 @@ namespace EpicRandomArena.ViewModels
                 return selectCommand ??
                     (selectCommand = new RelayCommand(obj =>
                     {
+                        TurnStart = false;
                         string kind = obj as string;
 
                         if (kind == "Strength")
@@ -189,6 +233,7 @@ namespace EpicRandomArena.ViewModels
                 return botSelectCommand ??
                     (botSelectCommand = new RelayCommand(obj =>
                     {
+                        TurnStart = false;
                         selectedAttribute = AIChoice();
 
                         TurnResult();
@@ -206,19 +251,24 @@ namespace EpicRandomArena.ViewModels
             opponentDeck.Drop();
             if (currentPlayerCard.IsGreater(currentOpponentCard, selectedAttribute))
             {
-                droppedCards.Add(currentOpponentCard);
+                playerDroppedCards.Add(currentOpponentCard);
                 playerDeck.Add(currentPlayerCard);
+                PlayerPositiveTurnResult = true;
+                EvenTurnResult = false;
             }
             else if (currentOpponentCard.IsGreater(currentPlayerCard, selectedAttribute))
             {
-                droppedCards.Add(currentPlayerCard);
+                playerDroppedCards.Add(currentPlayerCard);
                 opponentDeck.Add(currentOpponentCard);
+                PlayerPositiveTurnResult = false;
+                EvenTurnResult = false;
             }
             else
             {
-                Console.WriteLine("It works!");
                 playerDeck.RandomShove(currentPlayerCard);
                 opponentDeck.RandomShove(currentOpponentCard);
+                PlayerPositiveTurnResult = false;
+                EvenTurnResult = true;
             }
         }
 
@@ -233,8 +283,8 @@ namespace EpicRandomArena.ViewModels
                     Console.WriteLine("Game over");
                 }
                 else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1
-                            && playerDeck.TopCard == opponentDeck.TopCard) Console.WriteLine("Friendship won");
-                else if (opponentDeck.Count() == 0) Console.WriteLine("You won!");
+                            && playerDeck.TopCard == opponentDeck.TopCard) GameInADraw = true;
+                else if (opponentDeck.Count() == 0) PlayerVictory = true;
                 else
                 {
                     PlayerCardTitle = playerDeck.TopCard.Title;
@@ -248,6 +298,8 @@ namespace EpicRandomArena.ViewModels
                     OpponentCardIntelligencePoints = opponentDeck.TopCard.Intelligence.Points.ToString();
                     OpponentCardStealthPoints = opponentDeck.TopCard.Stealth.Points.ToString();
                     OpponentCardStrengthPoints = opponentDeck.TopCard.Strength.Points.ToString();
+
+                    TurnStart = true;
                 }
             }
             catch (ArgumentOutOfRangeException) { }
