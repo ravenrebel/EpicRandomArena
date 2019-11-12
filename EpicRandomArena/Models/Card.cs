@@ -42,5 +42,20 @@ namespace EpicRandomArena.Models
                 else return (a2.Level == Levels.Higth) ? true : false;
             }
         }
+
+        public static bool operator ==(Card card1, Card card2)
+        {
+            return (card1.Title == card2.Title
+                        && card1.Image == card2.Image
+            //&& card1.Intelligence == card2.Intelligence
+            //&& card1.Stealth == card2.Stealth
+            //&& card1.Strength == card2.Strength);
+            );
+        }
+
+        public static bool operator !=(Card card1, Card card2)
+        {
+            return !(card1 == card2);
+        }
     }
 }

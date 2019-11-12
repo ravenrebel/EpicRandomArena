@@ -24,7 +24,6 @@ namespace EpicRandomArena.ViewModels
 
         private bool isYourTurn = true;
         private bool playerPositiveTurnResult = false;
-        private bool evenTurnResult = false;
         private bool playerVictory = false;
         private bool opponentVictory = false;
         private bool gameInADrow = false;
@@ -34,9 +33,10 @@ namespace EpicRandomArena.ViewModels
         {
             playerDeck = new Deck();
             opponentDeck = new Deck();
+            Shuffle();
             playerDroppedCards = new List<Card>();
-            currentPlayerCard = playerDeck.TopCard;
-            currentOpponentCard = opponentDeck.TopCard;
+            currentPlayerCard = playerDeck[0];
+            currentOpponentCard = opponentDeck[0];
         }
 
         public string PlayerCardTitle
@@ -160,21 +160,12 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("PlayerPositiveTurnResult");
             }
         }
-        public bool EvenTurnResult
-        {
-            get => evenTurnResult;
-            set
-            {
-               evenTurnResult = value;
-                OnPropertyChanged("EvenTurnResult");
-            }
-        }
         public bool PlayerVictory
         {
             get => playerVictory;
             set
             {
-               playerVictory = value;
+                playerVictory = value;
                 OnPropertyChanged("PlayerVictory");
             }
         }
@@ -183,7 +174,7 @@ namespace EpicRandomArena.ViewModels
             get => opponentVictory;
             set
             {
-               opponentVictory = value;
+                opponentVictory = value;
                 OnPropertyChanged("OpponentVictory");
             }
         }
@@ -256,8 +247,8 @@ namespace EpicRandomArena.ViewModels
 
         private void Turn()
         {
-            currentPlayerCard = playerDeck.TopCard;
-            currentOpponentCard = opponentDeck.TopCard;
+            currentPlayerCard = playerDeck[0];
+            currentOpponentCard = opponentDeck[0];
 
             playerDeck.Drop();
             opponentDeck.Drop();
@@ -266,21 +257,12 @@ namespace EpicRandomArena.ViewModels
                 playerDroppedCards.Add(currentOpponentCard);
                 playerDeck.Add(currentPlayerCard);
                 PlayerPositiveTurnResult = true;
-                EvenTurnResult = false;
             }
-            else if (currentOpponentCard.IsGreater(currentPlayerCard, selectedAttribute))
+            else 
             {
                 playerDroppedCards.Add(currentPlayerCard);
                 opponentDeck.Add(currentOpponentCard);
                 PlayerPositiveTurnResult = false;
-                EvenTurnResult = false;
-            }
-            else
-            {
-                //playerDeck.Add(currentPlayerCard);
-                //opponentDeck.Add(currentOpponentCard);
-                PlayerPositiveTurnResult = false;
-                EvenTurnResult = true;
             }
         }
 
@@ -292,21 +274,21 @@ namespace EpicRandomArena.ViewModels
 
                 if (playerDeck.Count() == 0) OpponentVictory = true;
                 else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1
-                            && playerDeck.TopCard == opponentDeck.TopCard) GameInADraw = true;
+                            && playerDeck[0] == opponentDeck[0]) GameInADraw = true;
                 else if (opponentDeck.Count() == 0) PlayerVictory = true;
                 else
                 {
-                    PlayerCardTitle = playerDeck.TopCard.Title;
-                    PlayerCardImage = playerDeck.TopCard.Image;
-                    PlayerCardIntelligencePoints = playerDeck.TopCard.Intelligence.Points.ToString();
-                    PlayerCardStealthPoints = playerDeck.TopCard.Stealth.Points.ToString();
-                    PlayerCardStrengthPoints = playerDeck.TopCard.Strength.Points.ToString();
+                    PlayerCardTitle = playerDeck[0].Title;
+                    PlayerCardImage = playerDeck[0].Image;
+                    PlayerCardIntelligencePoints = playerDeck[0].Intelligence.Points.ToString();
+                    PlayerCardStealthPoints = playerDeck[0].Stealth.Points.ToString();
+                    PlayerCardStrengthPoints = playerDeck[0].Strength.Points.ToString();
 
-                    OpponentCardTitle = opponentDeck.TopCard.Title;
-                    OpponentCardImage = opponentDeck.TopCard.Image;
-                    OpponentCardIntelligencePoints = opponentDeck.TopCard.Intelligence.Points.ToString();
-                    OpponentCardStealthPoints = opponentDeck.TopCard.Stealth.Points.ToString();
-                    OpponentCardStrengthPoints = opponentDeck.TopCard.Strength.Points.ToString();
+                    OpponentCardTitle = opponentDeck[0].Title;
+                    OpponentCardImage = opponentDeck[0].Image;
+                    OpponentCardIntelligencePoints = opponentDeck[0].Intelligence.Points.ToString();
+                    OpponentCardStealthPoints = opponentDeck[0].Stealth.Points.ToString();
+                    OpponentCardStrengthPoints = opponentDeck[0].Strength.Points.ToString();
 
                     TurnStart = true;
                 }
@@ -317,6 +299,35 @@ namespace EpicRandomArena.ViewModels
         private Models.Attribute.Kinds AIChoice()
         {
             return Models.Attribute.Kinds.Intelligence;
+        }
+
+        private void Shuffle()
+        {
+            Random rng = new Random();
+            int deckCount = opponentDeck.Count();
+            bool isAtLeastOneEqual = true;
+
+            while (isAtLeastOneEqual)
+            {
+                isAtLeastOneEqual = false;
+                for (int i = 0; i < deckCount; i++)
+                {
+                    if (playerDeck[i] == (opponentDeck[i]))
+                    {
+                        int playerCardIndex = rng.Next(deckCount);
+                        int opponentCardIndex = rng.Next(deckCount);
+
+                        Card playerCard = playerDeck[playerCardIndex];
+                        playerDeck[playerCardIndex] = playerDeck[i];
+                        playerDeck[i] = playerCard;
+
+                        Card opponentCard = opponentDeck[opponentCardIndex];
+                        opponentDeck[opponentCardIndex] = opponentDeck[i];
+                        opponentDeck[i] = opponentCard;
+                        isAtLeastOneEqual = true;
+                    }
+                }
+            }
         }
     }
 }
