@@ -115,10 +115,10 @@ namespace EpicRandomArena.ViewModels
         }
         public string OpponentCardStealthPoints
         {
-            get => currentOpponentCard.Strength.Points.ToString();
+            get => currentOpponentCard.Stealth.Points.ToString();
             set
             {
-                currentOpponentCard.Strength.Points = Convert.ToInt32(value);
+                currentOpponentCard.Stealth.Points = Convert.ToInt32(value);
                 OnPropertyChanged("OpponentCardStealthPoints");
             }
         }
