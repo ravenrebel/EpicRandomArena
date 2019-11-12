@@ -109,7 +109,7 @@ namespace EpicRandomArena.ViewModels
             get => currentOpponentCard.Intelligence.Points.ToString();
             set
             {
-                currentPlayerCard.Intelligence.Points = Convert.ToInt32(value);
+                currentOpponentCard.Intelligence.Points = Convert.ToInt32(value);
                 OnPropertyChanged("OpponentCardIntelligencePoints");
             }
         }
@@ -118,7 +118,7 @@ namespace EpicRandomArena.ViewModels
             get => currentOpponentCard.Strength.Points.ToString();
             set
             {
-                currentPlayerCard.Strength.Points = Convert.ToInt32(value);
+                currentOpponentCard.Strength.Points = Convert.ToInt32(value);
                 OnPropertyChanged("OpponentCardStealthPoints");
             }
         }
@@ -127,7 +127,7 @@ namespace EpicRandomArena.ViewModels
             get => currentOpponentCard.Strength.Points.ToString();
             set
             {
-                currentPlayerCard.Strength.Points = Convert.ToInt32(value);
+                currentOpponentCard.Strength.Points = Convert.ToInt32(value);
                 OnPropertyChanged("OpponentCardStrengthPoints");
             }
         }
@@ -277,8 +277,8 @@ namespace EpicRandomArena.ViewModels
             }
             else
             {
-                playerDeck.RandomShove(currentPlayerCard);
-                opponentDeck.RandomShove(currentOpponentCard);
+                //playerDeck.Add(currentPlayerCard);
+                //opponentDeck.Add(currentOpponentCard);
                 PlayerPositiveTurnResult = false;
                 EvenTurnResult = true;
             }
