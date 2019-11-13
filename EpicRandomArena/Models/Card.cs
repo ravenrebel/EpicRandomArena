@@ -37,9 +37,9 @@ namespace EpicRandomArena.Models
             if (a1.Level == a2.Level) return (a1.Points > a2.Points) ? true : false;
             else
             {
-                if (a1.Level == Levels.Higth) return (a2.Level == Levels.Middle) ? true : false;
+                if (a1.Level == Levels.High) return (a2.Level == Levels.Middle) ? true : false;
                 else if (a1.Level == Levels.Middle) return (a2.Level == Levels.Low) ? true : false;
-                else return (a2.Level == Levels.Higth) ? true : false;
+                else return (a2.Level == Levels.High) ? true : false;
             }
         }
 

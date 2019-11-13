@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EpicRandomArena.Models
 {
@@ -25,7 +22,7 @@ namespace EpicRandomArena.Models
             cards.Add(new Card("Pudge", "/EpicRandomArena;component/Graphics/CardFolder/pudge.jpg", 2, 12, 1));
             cards.Add(new Card("Invoker", "/EpicRandomArena;component/Graphics/CardFolder/invoker.jpg", 13, 3, 14));
             cards.Add(new Card("Valentin", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 15, 9, 6));
-            cards.Add(new Card("Thor", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 4, 14, 5));
+            cards.Add(new Card("Thor", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 4, 13, 5));
             cards.Add(new Card("Geralt of Rivia", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 10, 10, 9));
             cards.Add(new Card("Saitama", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 3, 15, 4));
             cards.Add(new Card("Elon Mask", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 10, 6, 14));

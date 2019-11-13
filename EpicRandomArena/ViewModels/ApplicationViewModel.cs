@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Media;
+using static EpicRandomArena.Models.Attribute;
 
 namespace EpicRandomArena.ViewModels
 {
@@ -24,10 +21,15 @@ namespace EpicRandomArena.ViewModels
 
         private bool isYourTurn = true;
         private bool playerPositiveTurnResult = false;
+        private bool evenTurnResult = false;
         private bool playerVictory = false;
         private bool opponentVictory = false;
         private bool gameInADrow = false;
         private bool turnStart = false;
+
+        //private int playerCardStealthLevel;
+        //private string playerCardStrengthLevel;
+        //private string playerCardInteligenceLevel;
 
         public ApplicationViewModel()
         {
@@ -57,31 +59,58 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("PlayerCardImage");
             }
         }
-        public string PlayerCardIntelligencePoints
+        public int PlayerCardIntelligencePoints
         {
-            get => currentPlayerCard.Intelligence.Points.ToString();
+            get => currentPlayerCard.Intelligence.Points;
             set
             {
-                currentPlayerCard.Intelligence.Points = Convert.ToInt32(value);
+                currentPlayerCard.Intelligence.Points = value;
                 OnPropertyChanged("PlayerCardIntelligencePoints");
             }
         }
-        public string PlayerCardStealthPoints
+        public int PlayerCardStealthPoints
         {
-            get => currentPlayerCard.Stealth.Points.ToString();
+            get => currentPlayerCard.Stealth.Points;
             set
             {
-                currentPlayerCard.Stealth.Points = Convert.ToInt32(value);
+                currentPlayerCard.Stealth.Points = value;
                 OnPropertyChanged("PlayerCardStealthPoints");
             }
         }
-        public string PlayerCardStrengthPoints
+        public int PlayerCardStrengthPoints
         {
-            get => currentPlayerCard.Strength.Points.ToString();
+            get => currentPlayerCard.Strength.Points;
             set
             {
-                currentPlayerCard.Strength.Points = Convert.ToInt32(value);
+                currentPlayerCard.Strength.Points = value;
                 OnPropertyChanged("PlayerCardStrengthPoints");
+            }
+        }
+        public Levels PlayerCardIntelligenceLevel
+        {
+            get => currentPlayerCard.Intelligence.Level;
+            set
+            {
+                currentPlayerCard.Intelligence.Level = value;
+                OnPropertyChanged("PlayerCardIntelligenceLevel");
+            }
+        }
+        public Levels PlayerCardStealthLevel
+        {
+            get => currentPlayerCard.Stealth.Level;
+            set
+            {
+                currentPlayerCard.Stealth.Level = value;
+                OnPropertyChanged("PlayerCardStealthLevel");
+            }
+        }
+        public Levels PlayerCardStrengthLevel
+        {
+            get => currentPlayerCard.Strength.Level;
+            set
+            {
+                currentPlayerCard.Strength.Level = value;
+                OnPropertyChanged("PlayerCardStrengthLevel");
             }
         }
 
@@ -104,35 +133,62 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("OpponentCardImage");
             }
         }
-        public string OpponentCardIntelligencePoints
+        public int OpponentCardIntelligencePoints
         {
-            get => currentOpponentCard.Intelligence.Points.ToString();
+            get => currentOpponentCard.Intelligence.Points;
             set
             {
-                currentOpponentCard.Intelligence.Points = Convert.ToInt32(value);
+                currentOpponentCard.Intelligence.Points = value;
                 OnPropertyChanged("OpponentCardIntelligencePoints");
             }
         }
-        public string OpponentCardStealthPoints
+        public int OpponentCardStealthPoints
         {
-            get => currentOpponentCard.Stealth.Points.ToString();
+            get => currentOpponentCard.Stealth.Points;
             set
             {
-                currentOpponentCard.Stealth.Points = Convert.ToInt32(value);
+                currentOpponentCard.Stealth.Points = value;
                 OnPropertyChanged("OpponentCardStealthPoints");
             }
         }
-        public string OpponentCardStrengthPoints
+        public int OpponentCardStrengthPoints
         {
-            get => currentOpponentCard.Strength.Points.ToString();
+            get => currentOpponentCard.Strength.Points;
             set
             {
-                currentOpponentCard.Strength.Points = Convert.ToInt32(value);
+                currentOpponentCard.Strength.Points = value;
                 OnPropertyChanged("OpponentCardStrengthPoints");
             }
         }
+        public Levels OpponentCardIntelligenceLevel
+        {
+            get => currentOpponentCard.Intelligence.Level;
+            set
+            {
+                currentOpponentCard.Intelligence.Level = value;
+                OnPropertyChanged("OpponentCardIntelligenceLevel");
+            }
+        }
+        public Levels OpponentCardStealthLevel
+        {
+            get => currentOpponentCard.Stealth.Level;
+            set
+            {
+                currentOpponentCard.Stealth.Level = value;
+                OnPropertyChanged("OpponentCardStealthLevel");
+            }
+        }
+        public Levels OpponentCardStrengthLevel
+        {
+            get => currentOpponentCard.Strength.Level;
+            set
+            {
+                currentOpponentCard.Strength.Level = value;
+                OnPropertyChanged("OpponentCardStrengthLevel");
+            }
+        }
 
-        public Models.Attribute.Kinds SelectedAttribute
+        public Kinds SelectedAttribute
         {
             get => selectedAttribute;
             set
@@ -158,6 +214,15 @@ namespace EpicRandomArena.ViewModels
             {
                 playerPositiveTurnResult = value;
                 OnPropertyChanged("PlayerPositiveTurnResult");
+            }
+        }
+        public bool EvenTurnResult
+        {
+            get => evenTurnResult;
+            set
+            {
+                evenTurnResult = value;
+                OnPropertyChanged("EvenTurnResult");
             }
         }
         public bool PlayerVictory
@@ -257,12 +322,21 @@ namespace EpicRandomArena.ViewModels
                 playerDroppedCards.Add(currentOpponentCard);
                 playerDeck.Add(currentPlayerCard);
                 PlayerPositiveTurnResult = true;
+                EvenTurnResult = false;
+            }
+            else if (currentOpponentCard.IsGreater(currentPlayerCard, selectedAttribute))
+            {
+                playerDroppedCards.Add(currentPlayerCard);
+                opponentDeck.Add(currentOpponentCard);
+                PlayerPositiveTurnResult = false;
+                EvenTurnResult = false;
             }
             else 
             {
                 playerDroppedCards.Add(currentPlayerCard);
                 opponentDeck.Add(currentOpponentCard);
                 PlayerPositiveTurnResult = false;
+                EvenTurnResult = true;
             }
         }
 
@@ -280,15 +354,21 @@ namespace EpicRandomArena.ViewModels
                 {
                     PlayerCardTitle = playerDeck[0].Title;
                     PlayerCardImage = playerDeck[0].Image;
-                    PlayerCardIntelligencePoints = playerDeck[0].Intelligence.Points.ToString();
-                    PlayerCardStealthPoints = playerDeck[0].Stealth.Points.ToString();
-                    PlayerCardStrengthPoints = playerDeck[0].Strength.Points.ToString();
+                    PlayerCardIntelligencePoints = playerDeck[0].Intelligence.Points;
+                    PlayerCardStealthPoints = playerDeck[0].Stealth.Points;
+                    PlayerCardStrengthPoints = playerDeck[0].Strength.Points;
+                    PlayerCardIntelligenceLevel = playerDeck[0].Intelligence.Level;
+                    PlayerCardStealthLevel = playerDeck[0].Stealth.Level;
+                    PlayerCardStrengthLevel = playerDeck[0].Strength.Level;
 
                     OpponentCardTitle = opponentDeck[0].Title;
                     OpponentCardImage = opponentDeck[0].Image;
-                    OpponentCardIntelligencePoints = opponentDeck[0].Intelligence.Points.ToString();
-                    OpponentCardStealthPoints = opponentDeck[0].Stealth.Points.ToString();
-                    OpponentCardStrengthPoints = opponentDeck[0].Strength.Points.ToString();
+                    OpponentCardIntelligencePoints = opponentDeck[0].Intelligence.Points;
+                    OpponentCardStealthPoints = opponentDeck[0].Stealth.Points;
+                    OpponentCardStrengthPoints = opponentDeck[0].Strength.Points;
+                    OpponentCardIntelligenceLevel = opponentDeck[0].Intelligence.Level;
+                    OpponentCardStealthLevel = opponentDeck[0].Stealth.Level;
+                    OpponentCardStrengthLevel = opponentDeck[0].Strength.Level;
 
                     TurnStart = true;
                 }
@@ -315,7 +395,9 @@ namespace EpicRandomArena.ViewModels
                     if (playerDeck[i] == (opponentDeck[i]))
                     {
                         int playerCardIndex = rng.Next(deckCount);
-                        int opponentCardIndex = rng.Next(deckCount);
+                        int opponentCardIndex;
+                        do opponentCardIndex = rng.Next(deckCount);
+                        while (opponentCardIndex == playerCardIndex);
 
                         Card playerCard = playerDeck[playerCardIndex];
                         playerDeck[playerCardIndex] = playerDeck[i];

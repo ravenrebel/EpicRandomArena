@@ -84,6 +84,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\RelayCommand.cs" />
+    <Compile Include="ViewModels\LevelToBrushConverter.cs" />
     <Compile Include="Views\ExitGameWindow.xaml.cs">
       <DependentUpon>ExitGameWindow.xaml</DependentUpon>
     </Compile>

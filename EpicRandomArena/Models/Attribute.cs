@@ -13,7 +13,7 @@ namespace EpicRandomArena.Models
             {
                 if (points <= 5) Level = Levels.Low;
                 else if (points >= 6 && points <= 10) Level = Levels.Middle;
-                else Level = Levels.Higth;
+                else Level = Levels.High;
             }
         }
 
@@ -27,7 +27,7 @@ namespace EpicRandomArena.Models
         {
             Low,
             Middle,
-            Higth
+            High
         }
 
         public enum Kinds
