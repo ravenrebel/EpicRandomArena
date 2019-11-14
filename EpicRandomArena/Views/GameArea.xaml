@@ -215,10 +215,10 @@
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="false">
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="true">
                                 <Setter Property="Visibility" Value="Visible"></Setter>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="true">
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="false">
                                 <Setter Property="Visibility" Value="Hidden"></Setter>
                             </DataTrigger>
                         </Style.Triggers>

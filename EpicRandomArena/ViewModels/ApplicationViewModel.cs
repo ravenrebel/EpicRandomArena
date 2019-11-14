@@ -13,7 +13,7 @@ namespace EpicRandomArena.ViewModels
         private Card currentPlayerCard;
         private Card currentOpponentCard;
 
-        private Models.Attribute.Kinds selectedAttribute;
+        private Kinds selectedAttribute;
 
         List<Card> playerDroppedCards;
         Deck playerDeck;
@@ -282,12 +282,11 @@ namespace EpicRandomArena.ViewModels
                         string kind = obj as string;
 
                         if (kind == "Strength")
-                            selectedAttribute = Models.Attribute.Kinds.Strength;
+                            selectedAttribute = Kinds.Strength;
                         else if (kind == "Strelth")
-                            selectedAttribute = Models.Attribute.Kinds.Stealth;
-                        else selectedAttribute = Models.Attribute.Kinds.Intelligence;
+                            selectedAttribute = Kinds.Stealth;
+                        else selectedAttribute =Kinds.Intelligence;
 
-                        TurnResult();
                         IsYourTurn = false;
                     }));
             }
@@ -301,10 +300,12 @@ namespace EpicRandomArena.ViewModels
                 return botSelectCommand ??
                     (botSelectCommand = new RelayCommand(obj =>
                     {
+                        TurnResult();
+                       
                         TurnStart = false;
                         selectedAttribute = AIChoice();
 
-                        TurnResult();
+                        TurnResult(); 
                         IsYourTurn = true;
                     }));
             }
