@@ -8,6 +8,7 @@
         WindowStyle="None" Height="150" Width="200"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
+        AllowsTransparency="True"
         Closing="Window_Closing">
     <Window.Resources>
         <Style x:Key="ExitGameWindowButton" TargetType="Button">
