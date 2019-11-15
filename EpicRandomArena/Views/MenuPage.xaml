@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EpicRandomArena"
-       MinWidth="1280" MinHeight="720">
+        mc:Ignorable="d" 
+        d:DesignHeight="720" d:DesignWidth="1280">
     <Page.Resources>
         <Style x:Key="MenuBtn" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
@@ -49,7 +50,7 @@
                     <Label Foreground="White" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="72" Content="EPIC RANDOM ARENA"></Label>
                 </StackPanel>
                 <StackPanel Grid.Row="1" >
-                    <Button x:Name="PlayButton" Click="PlayButton_Click" Style="{StaticResource MenuBtn}">PLAY</Button>
+                    <Button x:Name="PlayButton" Click="PlayButton_ClickAsync" Style="{StaticResource MenuBtn}">PLAY</Button>
                     <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource MenuBtn}">INFO</Button>
                     <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">EXIT</Button>
                 </StackPanel>

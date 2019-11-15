@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using EpicRandomArena.ViewModels;
 
 namespace EpicRandomArena
@@ -33,9 +34,16 @@ namespace EpicRandomArena
             Application.Current.Shutdown();
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private async void PlayButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            _NavigationFrame.Content = new Views.GameArea();
+            _NavigationFrame.Content = new Views.LoadingPage();
+          
+            await Task.Run(() => {
+                Application.Current.Dispatcher.BeginInvoke(
+                  DispatcherPriority.Background,
+                  new Action(() =>  _NavigationFrame.Content = new Views.GameArea()));
+            }).ConfigureAwait(true); 
+     
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)

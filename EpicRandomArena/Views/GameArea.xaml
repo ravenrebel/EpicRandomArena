@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EpicRandomArena.Views"
         xmlns:mvvm="clr-namespace:EpicRandomArena.ViewModels"
         mc:Ignorable="d"
-        MinWidth="1280" MinHeight="720">
+        d:DesignWidth="1280" d:DesignHeight="720">
     <Page.Resources>
         <mvvm:ApplicationViewModel x:Key="viewmodel" />
         <mvvm:LevelToBrushConverter x:Key="leveltobrush"/>
