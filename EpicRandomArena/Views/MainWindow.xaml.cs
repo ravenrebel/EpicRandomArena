@@ -20,10 +20,20 @@ namespace EpicRandomArena.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        MediaPlayer backgroundMusicPlayer; 
         public MainWindow()
         {
             InitializeComponent();
             StartAppAsync();
+            backgroundMusicPlayer =  new MediaPlayer();
+            backgroundMusicPlayer.MediaEnded += new EventHandler(Media_Ended);
+            backgroundMusicPlayer.MediaFailed += (o, args) =>
+            {
+                MessageBox.Show("Media Failed.");
+            };
+            backgroundMusicPlayer.Open(new Uri("../../Music/Mortal Kombat Theme [Remix].mp3", UriKind.RelativeOrAbsolute));
+
+            backgroundMusicPlayer.Play();
         }
 
         private async void StartAppAsync()
@@ -42,7 +52,11 @@ namespace EpicRandomArena.Views
                   DispatcherPriority.Background,
                   showMenu);
             }).ConfigureAwait(true);
+        }
 
+        private void Media_Ended(object sender, EventArgs e)
+        {
+            backgroundMusicPlayer.Position = TimeSpan.Zero;
         }
     }
 }

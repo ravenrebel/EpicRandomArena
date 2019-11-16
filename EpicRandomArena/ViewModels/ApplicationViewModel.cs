@@ -27,10 +27,6 @@ namespace EpicRandomArena.ViewModels
         private bool gameInADrow = false;
         private bool turnStart = false;
 
-        //private int playerCardStealthLevel;
-        //private string playerCardStrengthLevel;
-        //private string playerCardInteligenceLevel;
-
         public ApplicationViewModel()
         {
             playerDeck = new Deck();
