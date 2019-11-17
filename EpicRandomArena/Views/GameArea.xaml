@@ -300,7 +300,7 @@
         
         <!-- Кнопки виходу/черги бота -->
         <StackPanel Grid.Column="6" Grid.RowSpan="2">
-            <Button Content="Bot Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
+            <Button Content="Next Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
@@ -313,6 +313,20 @@
                 </Button.Style>
             </Button>
             <Button x:Name="ExitGameButton" Click="ExitGameButton_Click">Exit Game</Button>
+            <Label Content="{Binding Source={StaticResource viewmodel}, Path=SelectedAttribute}">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=TurnStart, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Label Content="{Binding Source={StaticResource viewmodel}, Path=OpponentDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label Content="{Binding Source={StaticResource viewmodel}, Path=PlayerDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
         </StackPanel>
         
         
@@ -329,7 +343,7 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=OpponentVictory, UpdateSourceTrigger=PropertyChanged}"
                                      Value="true">
-                                    <Setter Property="Content" Value="YOU LOOSE"/>
+                                    <Setter Property="Content" Value="YOU LOST"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=GameInADraw, UpdateSourceTrigger=PropertyChanged}"
                                      Value="true">

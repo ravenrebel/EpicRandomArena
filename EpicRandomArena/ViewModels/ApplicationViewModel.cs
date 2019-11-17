@@ -15,26 +15,34 @@ namespace EpicRandomArena.ViewModels
 
         private Kinds selectedAttribute;
 
-        List<Card> playerDroppedCards;
+        int playerHighLevelDroppedCardsCount = 0;
+        int playerMiddleLevelDroppedCardsCount = 0;
+        int playerLowLevelDroppedCardsCount = 0;
+        int playerDeckCount;
+        int opponentDeckCount;
+
         Deck playerDeck;
         Deck opponentDeck;
 
         private bool isYourTurn = true;
+        bool isBotTurn = false;
+
         private bool playerPositiveTurnResult = false;
         private bool evenTurnResult = false;
         private bool playerVictory = false;
         private bool opponentVictory = false;
         private bool gameInADrow = false;
-        private bool turnStart = false;
+        private bool turnStart = true;
 
         public ApplicationViewModel()
         {
             playerDeck = new Deck();
             opponentDeck = new Deck();
             Shuffle();
-            playerDroppedCards = new List<Card>();
             currentPlayerCard = playerDeck[0];
             currentOpponentCard = opponentDeck[0];
+            PlayerDeckCount = playerDeck.Count();
+            OpponentDeckCount = opponentDeck.Count();
         }
 
         public string PlayerCardTitle
@@ -193,6 +201,24 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("SelectedAttribute");
             }
         }
+        public int OpponentDeckCount
+        {
+            get => opponentDeckCount;
+            set
+            {
+                opponentDeckCount = value;
+                OnPropertyChanged("OpponentDeckCount");
+            }
+        }
+        public int PlayerDeckCount
+        {
+            get => playerDeckCount;
+            set
+            {
+                playerDeckCount = value;
+                OnPropertyChanged("PlayerDeckCount");
+            }
+        }
 
         public bool IsYourTurn
         {
@@ -278,10 +304,10 @@ namespace EpicRandomArena.ViewModels
                         string kind = obj as string;
 
                         if (kind == "Strength")
-                            selectedAttribute = Kinds.Strength;
-                        else if (kind == "Strelth")
-                            selectedAttribute = Kinds.Stealth;
-                        else selectedAttribute =Kinds.Intelligence;
+                            SelectedAttribute = Kinds.Strength;
+                        else if (kind == "Stealth")
+                            SelectedAttribute = Kinds.Stealth;
+                        else SelectedAttribute =Kinds.Intelligence;
 
                         IsYourTurn = false;
                     }));
@@ -296,13 +322,22 @@ namespace EpicRandomArena.ViewModels
                 return botSelectCommand ??
                     (botSelectCommand = new RelayCommand(obj =>
                     {
-                        TurnResult();
-                       
-                        TurnStart = false;
-                        selectedAttribute = AIChoice();
+                        if (isBotTurn == true)
+                        {
+                            TurnResult();
 
-                        TurnResult(); 
-                        IsYourTurn = true;
+                            TurnStart = false;
+                            IsYourTurn = true;
+                            isBotTurn = false;
+                        }
+                        else
+                        {
+                            TurnResult();
+
+                            TurnStart = false;
+                            SelectedAttribute = AIChoice();
+                            isBotTurn = true;
+                        }
                     }));
             }
         }
@@ -316,21 +351,22 @@ namespace EpicRandomArena.ViewModels
             opponentDeck.Drop();
             if (currentPlayerCard.IsGreater(currentOpponentCard, selectedAttribute))
             {
-                playerDroppedCards.Add(currentOpponentCard);
                 playerDeck.Add(currentPlayerCard);
+                OpponentDeckCount--;
                 PlayerPositiveTurnResult = true;
                 EvenTurnResult = false;
             }
             else if (currentOpponentCard.IsGreater(currentPlayerCard, selectedAttribute))
             {
-                playerDroppedCards.Add(currentPlayerCard);
+                Distribution();
                 opponentDeck.Add(currentOpponentCard);
+                PlayerDeckCount--;
                 PlayerPositiveTurnResult = false;
                 EvenTurnResult = false;
             }
             else 
             {
-                playerDroppedCards.Add(currentPlayerCard);
+                playerDeck.Add(currentPlayerCard);
                 opponentDeck.Add(currentOpponentCard);
                 PlayerPositiveTurnResult = false;
                 EvenTurnResult = true;
@@ -343,10 +379,10 @@ namespace EpicRandomArena.ViewModels
             {
                 Turn();
 
-                if (playerDeck.Count() == 0) OpponentVictory = true;
-                else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1
+                if (playerDeckCount == 0) OpponentVictory = true;
+                else if (playerDeckCount == 1 && opponentDeckCount == 1
                             && playerDeck[0] == opponentDeck[0]) GameInADraw = true;
-                else if (opponentDeck.Count() == 0) PlayerVictory = true;
+                else if (opponentDeckCount == 0) PlayerVictory = true;
                 else
                 {
                     PlayerCardTitle = playerDeck[0].Title;
@@ -373,9 +409,22 @@ namespace EpicRandomArena.ViewModels
             catch (ArgumentOutOfRangeException) { }
         }
 
-        private Models.Attribute.Kinds AIChoice()
+        private Kinds AIChoice()
         {
-            return Models.Attribute.Kinds.Intelligence;
+            if (playerHighLevelDroppedCardsCount < playerMiddleLevelDroppedCardsCount
+                && playerHighLevelDroppedCardsCount < playerLowLevelDroppedCardsCount) return currentOpponentCard.GetKindByLevel(Levels.Low);
+            else if (playerMiddleLevelDroppedCardsCount < playerLowLevelDroppedCardsCount
+                && playerMiddleLevelDroppedCardsCount < playerHighLevelDroppedCardsCount) return currentOpponentCard.GetKindByLevel(Levels.High);
+            else if (playerLowLevelDroppedCardsCount < playerHighLevelDroppedCardsCount
+                && playerLowLevelDroppedCardsCount < playerMiddleLevelDroppedCardsCount) return currentOpponentCard.GetKindByLevel(Levels.Middle);
+            else
+            {
+                Random random = new Random();
+                int choice = random.Next(0, 2);
+                if (choice == 0) return Kinds.Intelligence;
+                else if (choice == 1) return Kinds.Stealth;
+                else return Kinds.Strength;
+            }
         }
 
         private void Shuffle()
@@ -407,6 +456,13 @@ namespace EpicRandomArena.ViewModels
                     }
                 }
             }
+        }
+
+        private void Distribution()
+        {
+            if (currentPlayerCard.Attribute(selectedAttribute).Level == Levels.High) playerHighLevelDroppedCardsCount++;
+            if (currentPlayerCard.Attribute(selectedAttribute).Level == Levels.Middle) playerMiddleLevelDroppedCardsCount++;
+            if (currentPlayerCard.Attribute(selectedAttribute).Level == Levels.Low) playerLowLevelDroppedCardsCount++;
         }
     }
 }

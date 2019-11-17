@@ -1,4 +1,5 @@
-﻿using static EpicRandomArena.Models.Attribute;
+﻿using System;
+using static EpicRandomArena.Models.Attribute;
 
 namespace EpicRandomArena.Models
 {
@@ -45,17 +46,85 @@ namespace EpicRandomArena.Models
 
         public static bool operator ==(Card card1, Card card2)
         {
-            return (card1.Title == card2.Title
-                        && card1.Image == card2.Image
-            //&& card1.Intelligence == card2.Intelligence
-            //&& card1.Stealth == card2.Stealth
-            //&& card1.Strength == card2.Strength);
-            );
+            return (card1.Title == card2.Title);
         }
 
         public static bool operator !=(Card card1, Card card2)
         {
             return !(card1 == card2);
+        }
+
+        public Kinds GetKindByLevel(Levels lvl)
+        {
+            Random random = new Random();
+            int choice;
+            if (Intelligence.Level == lvl && Stealth.Level == lvl && Strength.Level == lvl)
+            {
+                if (Intelligence.Points > Stealth.Points && Intelligence.Points > Strength.Points) return Kinds.Intelligence;
+                else if (Stealth.Points > Intelligence.Points && Stealth.Points > Strength.Points) return Kinds.Stealth;
+                else if (Strength.Points > Intelligence.Points && Strength.Points > Stealth.Points) return Kinds.Strength;
+                else if (Intelligence.Points > Stealth.Points && Intelligence.Points == Strength.Points)
+                {
+                    choice = random.Next(0, 1);
+                    if (choice == 0) return Kinds.Intelligence;
+                    if (choice == 1) return Kinds.Strength;
+                }
+                else if (Stealth.Points > Intelligence.Points && Stealth.Points == Strength.Points)
+                {
+                    choice = random.Next(0, 1);
+                    if (choice == 0) return Kinds.Stealth;
+                    if (choice == 1) return Kinds.Strength;
+                }
+                else if (Stealth.Points == Intelligence.Points && Stealth.Points > Strength.Points)
+                {
+                    choice = random.Next(0, 1);
+                    if (choice == 0) return Kinds.Intelligence;
+                    if (choice == 1) return Kinds.Stealth;
+                }
+                else
+                {
+                    choice = random.Next(0, 2);
+                    if (choice == 0) return Kinds.Intelligence;
+                    else if (choice == 1) return Kinds.Stealth;
+                    else return Kinds.Strength;
+                }
+            }
+            else if (Intelligence.Level == lvl && Stealth.Level == lvl)
+            {
+                if (Intelligence.Points > Stealth.Points) return Kinds.Intelligence;
+                else if (Stealth.Points > Intelligence.Points) return Kinds.Stealth;
+                else
+                {
+                    choice = random.Next(0, 1);
+                    if (choice == 0) return Kinds.Intelligence;
+                    if (choice == 1) return Kinds.Stealth;
+                }
+            }
+            else if (Strength.Level == lvl && Stealth.Level == lvl)
+            {
+                if (Stealth.Points > Strength.Points) return Kinds.Stealth;
+                else if (Strength.Points > Stealth.Points) return Kinds.Strength;
+                else
+                {
+                    choice = random.Next(0, 1);
+                    if (choice == 0) return Kinds.Strength;
+                    if (choice == 1) return Kinds.Stealth;
+                }
+            }
+            else if (Intelligence.Level == lvl && Strength.Level == lvl)
+            {
+                if (Intelligence.Points > Strength.Points) return Kinds.Intelligence;
+                else if (Strength.Points > Intelligence.Points) return Kinds.Strength;
+                else
+                {
+                    choice = random.Next(0, 1);
+                    if (choice == 0) return Kinds.Intelligence;
+                    if (choice == 1) return Kinds.Strength;
+                }
+            }
+            else if (Intelligence.Level == lvl) return Kinds.Intelligence;
+            else if (Stealth.Level == lvl) return Kinds.Stealth;
+            return Kinds.Strength;
         }
     }
 }
