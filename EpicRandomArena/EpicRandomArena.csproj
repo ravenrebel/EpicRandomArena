@@ -173,6 +173,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Graphics\CardFolder\arthas.jpg" />
+    <Resource Include="Graphics\CardFolder\darth_vader.jpg" />
+    <Resource Include="Graphics\CardFolder\elon_mask.jpg" />
+    <Resource Include="Graphics\CardFolder\geralt.jpg" />
+    <Resource Include="Graphics\CardFolder\loki.jpg" />
+    <Resource Include="Graphics\CardFolder\saitama.gif" />
+    <Resource Include="Graphics\CardFolder\thor.jpg" />
+    <Resource Include="Graphics\CardFolder\tony_stark.jpg" />
     <Content Include="Music\Mortal Kombat Theme [Remix].mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

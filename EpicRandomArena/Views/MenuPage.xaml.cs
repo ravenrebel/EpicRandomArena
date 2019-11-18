@@ -37,13 +37,13 @@ namespace EpicRandomArena
         private async void PlayButton_ClickAsync(object sender, RoutedEventArgs e)
         {
             _NavigationFrame.Content = new Views.LoadingPage();
-          
-            await Task.Run(() => {
+
+            await Task.Run(() =>
+            {
                 Application.Current.Dispatcher.BeginInvoke(
                   DispatcherPriority.Background,
-                  new Action(() =>  _NavigationFrame.Content = new Views.GameArea()));
-            }).ConfigureAwait(true); 
-     
+                  new Action(() => _NavigationFrame.Content = new Views.GameArea()));
+            }).ConfigureAwait(true);
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)

@@ -9,7 +9,7 @@ namespace EpicRandomArena.Models
         {
             Title = title;
             Image = image;
-            Stealth = new  Attribute(stealth, Kinds.Stealth);
+            Stealth = new Attribute(stealth, Kinds.Stealth);
             Strength = new Attribute(strength, Kinds.Strength);
             Intelligence = new Attribute(intelligence, Kinds.Intelligence);
         }
@@ -125,6 +125,48 @@ namespace EpicRandomArena.Models
             else if (Intelligence.Level == lvl) return Kinds.Intelligence;
             else if (Stealth.Level == lvl) return Kinds.Stealth;
             return Kinds.Strength;
+        }
+
+        public Kinds MaxPoints()
+        {
+            Random random = new Random();
+            int choice;
+            if (Diff(Intelligence) < Diff(Stealth) && Diff(Intelligence) < Diff(Strength)) return Kinds.Intelligence;
+            else if (Diff(Stealth) < Diff(Intelligence) && Diff(Stealth) < Diff(Strength)) return Kinds.Stealth;
+            else if (Diff(Strength) < Diff(Intelligence) && Diff(Strength) < Diff(Stealth)) return Kinds.Strength;
+            else if (Diff(Intelligence) == Diff(Stealth) && Diff(Intelligence) < Diff(Strength))
+            {
+                choice = random.Next(0, 1);
+                if (choice == 0) return Kinds.Intelligence;
+                if (choice == 1) return Kinds.Stealth;
+            }
+            else if (Diff(Stealth) == Diff(Strength) && Diff(Stealth) < Diff(Intelligence))
+            {
+                choice = random.Next(0, 1);
+                if (choice == 0) return Kinds.Strength;
+                if (choice == 1) return Kinds.Stealth;
+            }
+            else if (Diff(Strength) == Diff(Intelligence) && Diff(Strength) < Diff(Stealth))
+            {
+                choice = random.Next(0, 1);
+                if (choice == 0) return Kinds.Intelligence;
+                if (choice == 1) return Kinds.Strength;
+            }
+            else
+            {
+                choice = random.Next(0, 2);
+                if (choice == 0) return Kinds.Intelligence;
+                else if (choice == 1) return Kinds.Stealth;
+                else return Kinds.Strength;
+            }
+            return Kinds.Stealth;
+        }
+
+        private int Diff(Attribute attribute)
+        {
+            if (attribute.Level == Levels.High) return 15 - attribute.Points;
+            else if (attribute.Level == Levels.Middle) return 10 - attribute.Points;
+            else return 5 - attribute.Points;
         }
     }
 }

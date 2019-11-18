@@ -118,7 +118,6 @@ namespace EpicRandomArena.ViewModels
             }
         }
 
-
         public string OpponentCardTitle
         {
             get => currentOpponentCard.Title;
@@ -417,14 +416,7 @@ namespace EpicRandomArena.ViewModels
                 && playerMiddleLevelDroppedCardsCount < playerHighLevelDroppedCardsCount) return currentOpponentCard.GetKindByLevel(Levels.High);
             else if (playerLowLevelDroppedCardsCount < playerHighLevelDroppedCardsCount
                 && playerLowLevelDroppedCardsCount < playerMiddleLevelDroppedCardsCount) return currentOpponentCard.GetKindByLevel(Levels.Middle);
-            else
-            {
-                Random random = new Random();
-                int choice = random.Next(0, 2);
-                if (choice == 0) return Kinds.Intelligence;
-                else if (choice == 1) return Kinds.Stealth;
-                else return Kinds.Strength;
-            }
+            else return currentOpponentCard.MaxPoints();
         }
 
         private void Shuffle()
