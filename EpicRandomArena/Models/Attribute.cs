@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EpicRandomArena.Models
 {
@@ -22,6 +23,33 @@ namespace EpicRandomArena.Models
         public Levels Level { get; set; }
 
         public int Points { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Attribute attribute &&
+                   Kind == attribute.Kind &&
+                   Level == attribute.Level &&
+                   Points == attribute.Points;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1012777218;
+            hashCode = hashCode * -1521134295 + Kind.GetHashCode();
+            hashCode = hashCode * -1521134295 + Level.GetHashCode();
+            hashCode = hashCode * -1521134295 + Points.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(Attribute left, Attribute right)
+        {
+            return EqualityComparer<Attribute>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Attribute left, Attribute right)
+        {
+            return !(left == right);
+        }
 
         public enum Levels
         {

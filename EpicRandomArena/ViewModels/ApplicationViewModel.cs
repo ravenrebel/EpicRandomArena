@@ -343,11 +343,9 @@ namespace EpicRandomArena.ViewModels
 
         private void Turn()
         {
-            currentPlayerCard = playerDeck[0];
-            currentOpponentCard = opponentDeck[0];
-
             playerDeck.Drop();
             opponentDeck.Drop();
+
             if (currentPlayerCard.IsGreater(currentOpponentCard, selectedAttribute))
             {
                 playerDeck.Add(currentPlayerCard);
@@ -374,15 +372,20 @@ namespace EpicRandomArena.ViewModels
 
         private void TurnResult()
         {
+
             try
             {
                 Turn();
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine();
+            }
 
-                if (playerDeckCount == 0) OpponentVictory = true;
-                else if (playerDeckCount == 1 && opponentDeckCount == 1
-                            && playerDeck[0] == opponentDeck[0]) GameInADraw = true;
-                else if (opponentDeckCount == 0) PlayerVictory = true;
-                else
+            try
+            {
+                if (playerDeck.Count() == 0) OpponentVictory = true;
+                else if (playerDeck.Count() == 1 && opponentDeck.Count() == 1 && playerDeck[0] == opponentDeck[0])
                 {
                     PlayerCardTitle = playerDeck[0].Title;
                     PlayerCardImage = playerDeck[0].Image;
@@ -401,12 +404,45 @@ namespace EpicRandomArena.ViewModels
                     OpponentCardIntelligenceLevel = opponentDeck[0].Intelligence.Level;
                     OpponentCardStealthLevel = opponentDeck[0].Stealth.Level;
                     OpponentCardStrengthLevel = opponentDeck[0].Strength.Level;
+                    GameInADraw = true;
+                }
+                else if (opponentDeck.Count() == 0) PlayerVictory = true;
+                else
+                {
+                    try
+                    {
+                        currentPlayerCard = playerDeck[0];
+                        currentOpponentCard = opponentDeck[0];
 
-                    TurnStart = true;
+                        PlayerCardTitle = playerDeck[0].Title;
+                        PlayerCardImage = playerDeck[0].Image;
+                        PlayerCardIntelligencePoints = playerDeck[0].Intelligence.Points;
+                        PlayerCardStealthPoints = playerDeck[0].Stealth.Points;
+                        PlayerCardStrengthPoints = playerDeck[0].Strength.Points;
+                        PlayerCardIntelligenceLevel = playerDeck[0].Intelligence.Level;
+                        PlayerCardStealthLevel = playerDeck[0].Stealth.Level;
+                        PlayerCardStrengthLevel = playerDeck[0].Strength.Level;
+
+                        OpponentCardTitle = opponentDeck[0].Title;
+                        OpponentCardImage = opponentDeck[0].Image;
+                        OpponentCardIntelligencePoints = opponentDeck[0].Intelligence.Points;
+                        OpponentCardStealthPoints = opponentDeck[0].Stealth.Points;
+                        OpponentCardStrengthPoints = opponentDeck[0].Strength.Points;
+                        OpponentCardIntelligenceLevel = opponentDeck[0].Intelligence.Level;
+                        OpponentCardStealthLevel = opponentDeck[0].Stealth.Level;
+                        OpponentCardStrengthLevel = opponentDeck[0].Strength.Level;
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        Console.WriteLine();
+                    }
                 }
             }
-            catch (ArgumentOutOfRangeException) { }
-        }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.WriteLine();
+            }
+    }
 
         private Kinds AIChoice()
         {

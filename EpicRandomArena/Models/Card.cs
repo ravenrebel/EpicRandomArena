@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using static EpicRandomArena.Models.Attribute;
 
 namespace EpicRandomArena.Models
@@ -167,6 +168,27 @@ namespace EpicRandomArena.Models
             if (attribute.Level == Levels.High) return 15 - attribute.Points;
             else if (attribute.Level == Levels.Middle) return 10 - attribute.Points;
             else return 5 - attribute.Points;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Card card &&
+                   Title == card.Title &&
+                   Image == card.Image &&
+                   EqualityComparer<Attribute>.Default.Equals(Stealth, card.Stealth) &&
+                   EqualityComparer<Attribute>.Default.Equals(Strength, card.Strength) &&
+                   EqualityComparer<Attribute>.Default.Equals(Intelligence, card.Intelligence);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1849085919;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Title);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Image);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Attribute>.Default.GetHashCode(Stealth);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Attribute>.Default.GetHashCode(Strength);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Attribute>.Default.GetHashCode(Intelligence);
+            return hashCode;
         }
     }
 }
