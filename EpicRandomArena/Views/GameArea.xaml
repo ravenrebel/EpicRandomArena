@@ -22,12 +22,24 @@
         </Style>
         
         <Style x:Key="PlayerCardStyle" TargetType="StackPanel" BasedOn="{StaticResource CardStyle}">
-            <Setter Property="Margin" Value="30 40 30 50"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
         <Style x:Key="OpponentCardStyle" TargetType="StackPanel" BasedOn="{StaticResource CardStyle}">
-            <Setter Property="Margin" Value="30 50 30 50"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+
+        <Style x:Key="DeckCountStyle" TargetType="Label">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0, 1">
+                        <GradientStop Color="#dab8f0" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.45"/>
+                        <GradientStop Color="White" Offset="0.55"/>
+                        <GradientStop Color="#dab8f0" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         
         <!--  -->
@@ -126,14 +138,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="OpponentDeck" TargetType="Rectangle" BasedOn="{StaticResource BackCard}">
-            <Setter Property="Margin" Value="30 50 30 40"/>
-        </Style>
-        <Style x:Key="PlayerDeck" TargetType="Rectangle" BasedOn="{StaticResource BackCard}">
-            <Setter Property="Margin" Value="30 40 30 50"/>
-        </Style>
+
         <Style x:Key="DropCards" TargetType="Rectangle" BasedOn="{StaticResource BackCard}">
-            <Setter Property="Margin" Value="0 232 0 0"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 0 0 0"/>
         </Style>
 
     </Page.Resources>
@@ -156,14 +165,15 @@
             <ColumnDefinition Width="0.3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" MinHeight="320"/>
-            <RowDefinition Height="*" MinHeight="320"/>
+            <RowDefinition Height="4*" MinHeight="320"/>
+            <RowDefinition Height="*" MaxHeight="200"/>
+            <RowDefinition Height="4*" MinHeight="320"/>
         </Grid.RowDefinitions>
 
 
         <!-- Канва з карточкою бота повністю -->
 
-        <Canvas Grid.Column="3" Grid.Row="0">
+        <StackPanel Grid.Column="3" Grid.Row="0" VerticalAlignment="Center">
             <StackPanel Style="{StaticResource OpponentCardStyle}" >
 
                 <StackPanel x:Name="OpponentTtlCrd">
@@ -171,11 +181,11 @@
                 </StackPanel>
 
                 <!--  -->
-                <Canvas x:Name="OpponentPhtCrd" Style="{StaticResource OpponentPhotoStackPanelStyle}"></Canvas>
-                
+                <Canvas x:Name="OpponentPhtCrd" Style="{StaticResource OpponentPhotoStackPanelStyle}" HorizontalAlignment="Left" Margin="17,0,0,0"></Canvas>
+
                 <StackPanel x:Name="OpponentAtrb" Style="{StaticResource AttributeStackPanelStyle}">
                     <StackPanel x:Name="OpponentAtrbImg" Style="{StaticResource AttributeImageStackPanelStyle}">
-                        <Label Name="OpponentStrImg" Style="{StaticResource AttributeImageLabelStyle}" Margin="5 10 0 5">
+                        <Label Name="OpponentStrImg" Style="{StaticResource AttributeImageLabelStyle}" Margin="0,10,-0.4,5" HorizontalAlignment="Right">
                             <Label.Background>
                                 <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/StrSymbol.png"/>
                             </Label.Background>
@@ -210,8 +220,10 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            
-            <Rectangle Width="144" Height="256" Margin="30 50 30 40">
+        </StackPanel>
+
+        <StackPanel  Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Rectangle Width="144" Height="256">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
                         <Style.Triggers>
@@ -227,20 +239,29 @@
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/BackCard.png"/>
                 </Rectangle.Fill>
-
             </Rectangle>
-        </Canvas>
+        </StackPanel>
 
-        <Canvas Grid.Column="5" Grid.Row="0">
-            <Rectangle Style="{StaticResource OpponentDeck}"></Rectangle>
-        </Canvas>
+        <StackPanel Grid.Column="5" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-        <Canvas Grid.Column="5" Grid.Row="1">
-            <Rectangle Style="{StaticResource OpponentDeck}"></Rectangle>
-        </Canvas>
+            <Rectangle Style="{StaticResource BackCard}"></Rectangle>
+
+        </StackPanel>
+
+        <StackPanel  Grid.Column="5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Label VerticalAlignment="Center" Style="{StaticResource DeckCountStyle}" Margin=" 0 10 0 0" HorizontalContentAlignment="Center" Width="80" HorizontalAlignment="Center" FontSize="20" Content="{Binding Source={StaticResource viewmodel}, Path=OpponentDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+        </StackPanel>
+
+        <StackPanel Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Rectangle Style="{StaticResource BackCard}"></Rectangle>
+        </StackPanel>
+
+        <StackPanel  Grid.Column="5" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Label VerticalAlignment="Center" Style="{StaticResource DeckCountStyle}" Margin="0 0 0 10" HorizontalAlignment="Center" FontSize="20" Width="80" HorizontalContentAlignment="Center" Content="{Binding Source={StaticResource viewmodel}, Path=PlayerDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+        </StackPanel>
 
         <!-- Канва з карточкою гравця повністю -->
-        <Canvas Grid.Column="3" Grid.Row="1">
+        <StackPanel Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             
             <StackPanel Style="{StaticResource PlayerCardStyle}" >
                 <!--  -->
@@ -295,12 +316,16 @@
                 
             </StackPanel>
             
-        </Canvas>
+        </StackPanel>
         
         
         <!-- Кнопки виходу/черги бота -->
-        <StackPanel Grid.Column="6" Grid.RowSpan="2">
-            <Button Content="Next Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
+        <StackPanel Grid.Column="6" Grid.Row="0">
+            <Button x:Name="ExitGameButton" Background="Black" Foreground="Red" Click="ExitGameButton_Click" HorizontalAlignment="Right" Margin="0,0,-0.2,0" Width="57">Exit Game</Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Button Background="White" BorderBrush="Gray" FontSize="32" Foreground="Purple" VerticalAlignment="Center" Content="Next Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
@@ -312,8 +337,10 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button x:Name="ExitGameButton" Click="ExitGameButton_Click">Exit Game</Button>
-            <Label Content="{Binding Source={StaticResource viewmodel}, Path=SelectedAttribute}">
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label FontSize="32" Content="{Binding Source={StaticResource viewmodel}, Path=SelectedAttribute}">
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>
@@ -325,8 +352,10 @@
                     </Style>
                 </Label.Style>
             </Label>
-            <Label Content="{Binding Source={StaticResource viewmodel}, Path=OpponentDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
-            <Label Content="{Binding Source={StaticResource viewmodel}, Path=PlayerDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+        </StackPanel>
+
+        <StackPanel  Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center">
+            <Rectangle Style="{StaticResource DropCards}"></Rectangle>
         </StackPanel>
         
         
@@ -355,8 +384,6 @@
             </Label>
         </Canvas>
 
-        <Canvas Grid.Column="1" Grid.RowSpan="2">
-            <Rectangle Style="{StaticResource DropCards}"></Rectangle>
-        </Canvas>
+        
     </Grid>
 </Page>
