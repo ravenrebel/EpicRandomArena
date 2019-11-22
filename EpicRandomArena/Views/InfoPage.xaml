@@ -10,6 +10,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/Info.png"/>
         </Grid.Background>
-
+        
+        <StackPanel>
+            <Button x:Name="ExitButton" Background="Black" Foreground="Red" HorizontalAlignment="Right" Width="57">Exit</Button>
+        </StackPanel>
     </Grid>
 </Page>
