@@ -409,7 +409,6 @@ namespace EpicRandomArena.ViewModels
                 if (playerDeckCount == 0)
                 {
                     OpponentVictory = true;
-                    IsYourTurn = false;
                 }
                 else if (playerDeckCount == 1 && opponentDeckCount == 1 && playerDeck[0] == opponentDeck[0])
                 {
@@ -419,7 +418,6 @@ namespace EpicRandomArena.ViewModels
                 else if (opponentDeckCount == 0)
                 {
                     PlayerVictory = true;
-                    IsYourTurn = false;
                 }
                 else
                 {
