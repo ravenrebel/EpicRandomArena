@@ -95,7 +95,9 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <Style x:Key="AttributesButtonStyle" TargetType="Button">
+        <Style x:Key="StrPlButtonStyle" TargetType="Button">
+            <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
             <Setter Property="FontFamily" Value="Muriad Pro" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="Regular" />
@@ -103,13 +105,237 @@
             <Setter Property="Width" Value="80"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="#6aedf6"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="{Binding PlayerCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="CommandParameter" Value="Strength"/>
+            <Setter Property="Margin" Value="0 10 0 5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border"
+                        BorderThickness="2"
+                        Background="{Binding PlayerCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="#6aedf6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding PlayerCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <!--<Trigger Property="IsEnabled" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding PlayerCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="StlPlButtonStyle" TargetType="Button">
+            <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0 5"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="BorderBrush" Value="#6aedf6"/>
             <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CommandParameter" Value="Stealth"/>
+            <Setter Property="Background" Value="{Binding PlayerCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border"
+                        BorderThickness="2"
+                        Background="{Binding PlayerCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="#6aedf6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding PlayerCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IntPlButtonStyle" TargetType="Button">
             <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
             <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="#6aedf6"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CommandParameter" Value="Intelligence"/>
+            <Setter Property="Background" Value="{Binding PlayerCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border"
+                        BorderThickness="2"
+                        Background="{Binding PlayerCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="#6aedf6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding PlayerCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+
+
+        <Style x:Key="StrOpButtonStyle" TargetType="Button">
+            <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="#6aedf6"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="{Binding OpponentCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="CommandParameter" Value="Strength"/>
+            <Setter Property="Margin" Value="0 10 0 5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border"
+                        BorderThickness="2"
+                        Background="{Binding OpponentCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="#6aedf6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding OpponentCardStrengthPoints, Source={StaticResource viewmodel}}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding OpponentCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="StlOpButtonStyle" TargetType="Button">
+            <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="#6aedf6"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CommandParameter" Value="Stealth"/>
+            <Setter Property="Background" Value="{Binding OpponentCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border"
+                        BorderThickness="2"
+                        Background="{Binding OpponentCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="#6aedf6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding OpponentCardStealthPoints, Source={StaticResource viewmodel}}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding OpponentCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IntOpButtonStyle" TargetType="Button">
+            <Setter Property="Command" Value="{Binding SelectCommand, Source={StaticResource viewmodel}}"/>
+            <Setter Property="IsEnabled" Value="{Binding IsYourTurn, Source={StaticResource viewmodel}, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="BorderBrush" Value="#6aedf6"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CommandParameter" Value="Intelligence"/>
+            <Setter Property="Background" Value="{Binding OpponentCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border"
+                        BorderThickness="2"
+                        Background="{Binding OpponentCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" 
+                        BorderBrush="#6aedf6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding OpponentCardIntelligencePoints, Source={StaticResource viewmodel}}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{Binding OpponentCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#6aedf6" />
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <Style x:Key="AttributeImageLabelStyle" TargetType="Label">
             <Setter Property="Width" Value="30"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -202,21 +428,9 @@
                         </Label>
                     </StackPanel>
                     <StackPanel x:Name="OpponentAtrbBtn" Style="{StaticResource AttributeButtonStackPanelStyle}">
-                        <Button x:Name="OpponentStrBtn" 
-                                CommandParameter="Strength" Margin="0 10 0 5" 
-                                Style="{StaticResource AttributesButtonStyle}"
-                                Background="{Binding OpponentCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"
-                                Content = "{Binding OpponentCardStrengthPoints, Source={StaticResource viewmodel}}"/>
-                        <Button x:Name="OpponentStlBtn" 
-                                CommandParameter="Stealth"
-                                Style="{StaticResource AttributesButtonStyle}"
-                                Background="{Binding OpponentCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"
-                                Content="{Binding OpponentCardStealthPoints, Source={StaticResource viewmodel}}"/>
-                        <Button x:Name="OpponentIntBtn" 
-                                Content="{Binding OpponentCardIntelligencePoints, Source={StaticResource viewmodel}}"
-                                Background="{Binding OpponentCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"
-                                CommandParameter="Intelligence"
-                                Style="{StaticResource AttributesButtonStyle}"/>
+                        <Button x:Name="OpponentStrBtn" Style="{StaticResource StrOpButtonStyle}"/>
+                        <Button x:Name="OpponentStlBtn" Style="{StaticResource StlOpButtonStyle}"/>
+                        <Button x:Name="OpponentIntBtn" Style="{StaticResource IntOpButtonStyle}"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -294,23 +508,9 @@
                     
                     <!-- Кнопки характеристик -->
                     <StackPanel x:Name="PlayerAtrbBtn" Style="{StaticResource AttributeButtonStackPanelStyle}">
-                        <Button x:Name="PlayertStrBtn" 
-                                CommandParameter="Strength" 
-                                Margin="0 10 0 5" 
-                                Style="{StaticResource AttributesButtonStyle}"
-                                Background="{Binding PlayerCardStrengthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"
-                                Content = "{Binding PlayerCardStrengthPoints, Source={StaticResource viewmodel}}"/>
-                        <Button x:Name="PlayerStlBtn" 
-                                Content="{Binding PlayerCardStealthPoints, Source={StaticResource viewmodel}}" 
-                                Background="{Binding PlayerCardStealthLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"
-                                CommandParameter="Stealth"
-                                
-                                Style="{StaticResource AttributesButtonStyle}"/>
-                        <Button x:Name="PlayerIntBtn" 
-                                Content="{Binding PlayerCardIntelligencePoints, Source={StaticResource viewmodel}}"
-                                CommandParameter="Intelligence"
-                                Background="{Binding PlayerCardIntelligenceLevel, Source={StaticResource viewmodel}, Converter={StaticResource leveltobrush}, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource AttributesButtonStyle}"/>
+                        <Button x:Name="PlayertStrBtn" Style="{StaticResource StrPlButtonStyle}"/>
+                        <Button x:Name="PlayerStlBtn" Style="{StaticResource StlPlButtonStyle}"/>
+                        <Button x:Name="PlayerIntBtn" Style="{StaticResource IntPlButtonStyle}"/>
                     </StackPanel>
                 </StackPanel>
                 
@@ -357,12 +557,10 @@
         <StackPanel  Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center">
             <Rectangle Style="{StaticResource DropCards}"></Rectangle>
         </StackPanel>
-        
-        
-        
+
         <!--Надпис результату гри -->        
-        <Canvas Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label FontSize="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label FontSize="200" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="AliceBlue">
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>
@@ -382,7 +580,7 @@
                     </Style>
                 </Label.Style>
             </Label>
-        </Canvas>
+        </StackPanel>
 
         
     </Grid>

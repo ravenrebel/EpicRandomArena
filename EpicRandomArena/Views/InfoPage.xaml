@@ -12,7 +12,7 @@
         </Grid.Background>
         
         <StackPanel>
-            <Button x:Name="ExitButton" Background="Black" Foreground="Red" HorizontalAlignment="Right" Width="57">Exit</Button>
+            <Button x:Name="ExitButton" Background="Black" Foreground="Red" HorizontalAlignment="Right" Width="57" Click="ExitButton_Click">Exit</Button>
         </StackPanel>
     </Grid>
 </Page>
