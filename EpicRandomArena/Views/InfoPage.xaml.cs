@@ -24,5 +24,11 @@ namespace EpicRandomArena.Views
         {
             InitializeComponent();
         }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExitGameWindow exitGameWindow = new ExitGameWindow(Window.GetWindow(this));
+            exitGameWindow.Show();
+        }
     }
 }
