@@ -38,6 +38,7 @@ namespace EpicRandomArena.ViewModels
         {
             playerDeck = new Deck();
             opponentDeck = new Deck();
+            if (playerDeckCount == 1 || opponentDeckCount == 1)
             Shuffle();
             try
             {
@@ -424,6 +425,7 @@ namespace EpicRandomArena.ViewModels
                     currentPlayerCard = playerDeck[0];
                     currentOpponentCard = opponentDeck[0];
                     NextCardAssigmentForUI();
+                    TurnStart = true;
                 }
             }
             catch (NullReferenceException)
