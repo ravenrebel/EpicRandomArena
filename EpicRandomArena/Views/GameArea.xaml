@@ -28,20 +28,91 @@
             <Setter Property="VerticalAlignment" Value="Bottom"/>
         </Style>
 
-        <Style x:Key="DeckCountStyle" TargetType="Label">
+        <Style x:Key="PlDeckCountStyle" TargetType="Label">
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Background">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0 0 0 10"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Template">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0, 1">
-                        <GradientStop Color="#dab8f0" Offset="0"/>
-                        <GradientStop Color="White" Offset="0.45"/>
-                        <GradientStop Color="White" Offset="0.55"/>
-                        <GradientStop Color="#dab8f0" Offset="1" />
-                    </LinearGradientBrush>
+                    <ControlTemplate>
+                        <Border x:Name="Border">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Color="#dab8f0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.45"/>
+                                    <GradientStop Color="White" Offset="0.55"/>
+                                    <GradientStop Color="#dab8f0" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Source={StaticResource viewmodel}, Path=PlayerDeckCount, UpdateSourceTrigger=PropertyChanged}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Color="#dab8f0" Offset="0"/>
+                                            <GradientStop Color="White" Offset="0.45"/>
+                                            <GradientStop Color="White" Offset="0.55"/>
+                                            <GradientStop Color="#dab8f0" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <Style x:Key="OpDeckCountStyle" TargetType="Label">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0 10 0 0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Color="#dab8f0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.45"/>
+                                    <GradientStop Color="White" Offset="0.55"/>
+                                    <GradientStop Color="#dab8f0" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Source={StaticResource viewmodel}, Path=OpponentDeckCount, UpdateSourceTrigger=PropertyChanged}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Color="#dab8f0" Offset="0"/>
+                                            <GradientStop Color="White" Offset="0.45"/>
+                                            <GradientStop Color="White" Offset="0.55"/>
+                                            <GradientStop Color="#dab8f0" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <!--  -->
         <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Muriad Pro" />
@@ -463,7 +534,7 @@
         </StackPanel>
 
         <StackPanel  Grid.Column="5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Label VerticalAlignment="Center" Style="{StaticResource DeckCountStyle}" Margin=" 0 10 0 0" HorizontalContentAlignment="Center" Width="80" HorizontalAlignment="Center" FontSize="20" Content="{Binding Source={StaticResource viewmodel}, Path=OpponentDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label VerticalAlignment="Center" Style="{StaticResource OpDeckCountStyle}" ></Label>
         </StackPanel>
 
         <StackPanel Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -471,7 +542,7 @@
         </StackPanel>
 
         <StackPanel  Grid.Column="5" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <Label VerticalAlignment="Center" Style="{StaticResource DeckCountStyle}" Margin="0 0 0 10" HorizontalAlignment="Center" FontSize="20" Width="80" HorizontalContentAlignment="Center" Content="{Binding Source={StaticResource viewmodel}, Path=PlayerDeckCount, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <Label VerticalAlignment="Center" Style="{StaticResource PlDeckCountStyle}"></Label>
         </StackPanel>
 
         <!-- Канва з карточкою гравця повністю -->
@@ -521,11 +592,31 @@
         
         <!-- Кнопки виходу/черги бота -->
         <StackPanel Grid.Column="6" Grid.Row="0">
-            <Button x:Name="ExitGameButton" Background="Black" Foreground="Red" Click="ExitGameButton_Click" HorizontalAlignment="Right" Margin="0,0,-0.2,0" Width="57">Exit Game</Button>
+            <Button x:Name="ExitGameButton" Background="Black" Foreground="Red" Click="ExitGameButton_Click" HorizontalAlignment="Right" Width="20">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border x:Name="Border" Background="Black">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Х" RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter TargetName="Border" Property="Background" Value="black" />
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Button Background="White" BorderBrush="Gray" FontSize="32" Foreground="Purple" VerticalAlignment="Center" Content="Next Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
+            <Button Background="Black" BorderBrush="Gray" FontSize="32" Foreground="Purple" VerticalAlignment="Center" Content="Next Turn" Command="{Binding Source={StaticResource viewmodel}, Path=BotSelectCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Style.Triggers>
@@ -534,6 +625,22 @@
                                 <Setter Property="Visibility" Value="Hidden"/>
                             </DataTrigger>
                         </Style.Triggers>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border x:Name="Border" Background="Black" BorderBrush="Gray">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Next Turn" RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter TargetName="Border" Property="Background" Value="black" />
+                                            <Setter TargetName="Border" Property="BorderBrush" Value="gray" />
+                                            <Setter Property="Foreground" Value="Purple"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </Button.Style>
             </Button>
@@ -549,6 +656,20 @@
                                 <Setter Property="Visibility" Value="Hidden"/>
                             </DataTrigger>
                         </Style.Triggers>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border x:Name="Border">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Source={StaticResource viewmodel}, Path=SelectedAttribute}" RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </Label.Style>
             </Label>

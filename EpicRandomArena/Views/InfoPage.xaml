@@ -4,15 +4,50 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EpicRandomArena.Views"
-      mc:Ignorable="d" 
-      MinWidth="1280" MinHeight="720">
+      mc:Ignorable="d"
+      d:DesignWidth="1280" d:DesignHeight="720">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/Info.png"/>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="100"/>
+            <ColumnDefinition Width="10*" MinWidth="200"/>
+            <ColumnDefinition Width="*" MaxWidth="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MaxHeight="100"/>
+            <RowDefinition Height="8*" MinHeight="200"/>
+            <RowDefinition Height="*" MaxHeight="100"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" CanVerticallyScroll="True" VerticalAlignment="Center"  >
+            <TextBlock FontSize="48" Foreground="AliceBlue" TextWrapping="WrapWithOverflow" Text="Not a long time ago in a galaxy not very far away, scientists were searching for the Higgs boson. The Large Hadron Collider generated a large number of small black holes that became portals to many parallel Universes. This is how humanity met with foreigners and the First Universes War began. Heroes and villains made their choice: peaceful coexistence or the struggle for resources.">
+            </TextBlock>
+        </StackPanel>
         
-        <StackPanel>
-            <Button x:Name="ExitButton" Background="Black" Foreground="Red" HorizontalAlignment="Right" Width="57" Click="ExitButton_Click">Exit</Button>
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Button x:Name="ExitButton" Background="Black" Foreground="Red" HorizontalAlignment="Right" Width="20" Click="ExitButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border x:Name="Border" Background="Black">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Х" RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter TargetName="Border" Property="Background" Value="black" />
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>
