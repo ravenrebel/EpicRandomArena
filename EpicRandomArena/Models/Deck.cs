@@ -13,12 +13,12 @@ namespace EpicRandomArena.Models
         public Deck()
         {
             cards = new ObservableCollection<Card>();
-            //cards.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 9, 4, 11));
-            //cards.Add(new Card("Anastasia", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 9, 1, 12));
+            cards.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 9, 4, 11));
+            cards.Add(new Card("Anastasia", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 9, 1, 12));
             cards.Add(new Card("Tony Stark", "/EpicRandomArena;component/Graphics/CardFolder/tony_stark.jpg", 11, 5, 15));
             cards.Add(new Card("Batman", "/EpicRandomArena;component/Graphics/CardFolder/batman.jpg", 12, 10, 6));
             cards.Add(new Card("Darth Vader", "/EpicRandomArena;component/Graphics/CardFolder/darth_vader.jpg", 4, 14, 2));
-            cards.Add(new Card("Arthas", "/EpicRandomArena;component/Graphics/CardFolder/arthas.jpg", 8, 13, 7));
+            //cards.Add(new Card("Arthas", "/EpicRandomArena;component/Graphics/CardFolder/arthas.jpg", 8, 13, 7));
             //cards.Add(new Card("Pudge", "/EpicRandomArena;component/Graphics/CardFolder/pudge.jpg", 2, 12, 1));
             //cards.Add(new Card("Invoker", "/EpicRandomArena;component/Graphics/CardFolder/invoker.jpg", 13, 3, 14));
             //cards.Add(new Card("Valentin", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 15, 9, 6));
@@ -40,6 +40,8 @@ namespace EpicRandomArena.Models
         public void Drop() => cards.RemoveAt(0);
 
         public void Add(Card card) => cards.Add(card);
+
+        public void Insert(int index, Card card) => cards.Insert(index, card);
 
         public Card this[int i] 
         {
