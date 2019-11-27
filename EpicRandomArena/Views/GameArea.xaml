@@ -440,6 +440,22 @@
             <Setter Property="AllowDrop" Value="True"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0 0 0 0"/>
+            <Setter Property="Opacity" Value="0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=DroppedCardsExist}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                                               Duration="0:0:1">
+                                    <LinearDoubleKeyFrame KeyTime="99%" Value="0" />
+                                    <LinearDoubleKeyFrame KeyTime="100%" Value="1" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
     </Page.Resources>
@@ -529,7 +545,18 @@
 
         <StackPanel Grid.Column="5" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-            <Rectangle Style="{StaticResource BackCard}"></Rectangle>
+            <Rectangle>
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle" BasedOn="{StaticResource BackCard}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerVictory, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
 
         </StackPanel>
 
@@ -538,7 +565,18 @@
         </StackPanel>
 
         <StackPanel Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Rectangle Style="{StaticResource BackCard}"></Rectangle>
+            <Rectangle>
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle" BasedOn="{StaticResource BackCard}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=OpponentVictory, UpdateSourceTrigger=PropertyChanged}"
+                                     Value="true">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
         </StackPanel>
 
         <StackPanel  Grid.Column="5" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center">
@@ -676,7 +714,8 @@
         </StackPanel>
 
         <StackPanel  Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" VerticalAlignment="Center">
-            <Rectangle Style="{StaticResource DropCards}"></Rectangle>
+            <Rectangle x:Name="DroppedCardsRect" Style="{StaticResource DropCards}">
+            </Rectangle>
         </StackPanel>
 
         <!--Надпис результату гри -->        

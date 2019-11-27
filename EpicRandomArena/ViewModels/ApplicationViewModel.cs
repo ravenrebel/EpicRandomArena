@@ -33,12 +33,13 @@ namespace EpicRandomArena.ViewModels
         private bool opponentVictory = false;
         private bool gameInADrow = false;
         private bool turnStart = true;
+        private bool droppedCardsExist = false;
 
         public ApplicationViewModel()
         {
             playerDeck = new Deck();
             opponentDeck = new Deck();
-            if (playerDeckCount == 1 || opponentDeckCount == 1)
+            if (playerDeckCount != 1 && opponentDeckCount != 1)
             Shuffle();
             try
             {
@@ -295,8 +296,16 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("TurnStart");
             }
         }
-        /// 
- 
+        public bool DroppedCardsExist{
+            get => droppedCardsExist;
+            set
+            {
+                droppedCardsExist = value;
+                OnPropertyChanged("DroppedCardsExist");
+            }
+        }
+       /// 
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName]string prop = "")
@@ -363,6 +372,7 @@ namespace EpicRandomArena.ViewModels
             {
                 playerDeck.Add(currentPlayerCard);
                 OpponentDeckCount--;
+                DroppedCardsExist = true;
                 PlayerPositiveTurnResult = true;
                 EvenTurnResult = false;
             }
@@ -371,6 +381,7 @@ namespace EpicRandomArena.ViewModels
                 Distribution();
                 opponentDeck.Add(currentOpponentCard);
                 PlayerDeckCount--;
+                DroppedCardsExist = true;
                 PlayerPositiveTurnResult = false;
                 EvenTurnResult = false;
             }
