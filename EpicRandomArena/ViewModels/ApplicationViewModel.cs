@@ -24,8 +24,8 @@ namespace EpicRandomArena.ViewModels
         Deck playerDeck;
         Deck opponentDeck;
 
-        private bool isYourTurn = true;
-        private bool isBotTurn = false;
+        private bool isYourTurn;
+        private bool isBotTurn;
 
         private bool playerPositiveTurnResult = false;
         private bool evenTurnResult = false;
@@ -41,6 +41,18 @@ namespace EpicRandomArena.ViewModels
             opponentDeck = new Deck();
             if (playerDeckCount != 1 && opponentDeckCount != 1)
             Shuffle();
+            Random random = new Random();
+            if (random.Next(2) == 1)
+            {
+                IsYourTurn = false;
+                isBotTurn = true;
+                TurnStart = false;
+            }
+            else
+            {
+                IsYourTurn = true;
+                isBotTurn = false;
+            }
             try
             {
                 currentPlayerCard = playerDeck[0];
@@ -347,7 +359,7 @@ namespace EpicRandomArena.ViewModels
                         {
                             TurnResult();
 
-                            TurnStart = false;
+                            TurnStart = true;
                             IsYourTurn = true;
                             isBotTurn = false;
                         }

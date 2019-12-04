@@ -66,25 +66,25 @@ namespace EpicRandomArena.Models
                 else if (Strength.Points > Intelligence.Points && Strength.Points > Stealth.Points) return Kinds.Strength;
                 else if (Intelligence.Points > Stealth.Points && Intelligence.Points == Strength.Points)
                 {
-                    choice = random.Next(0, 1);
+                    choice = random.Next(0, 2);
                     if (choice == 0) return Kinds.Intelligence;
                     if (choice == 1) return Kinds.Strength;
                 }
                 else if (Stealth.Points > Intelligence.Points && Stealth.Points == Strength.Points)
                 {
-                    choice = random.Next(0, 1);
+                    choice = random.Next(0, 2);
                     if (choice == 0) return Kinds.Stealth;
                     if (choice == 1) return Kinds.Strength;
                 }
                 else if (Stealth.Points == Intelligence.Points && Stealth.Points > Strength.Points)
                 {
-                    choice = random.Next(0, 1);
+                    choice = random.Next(0, 2);
                     if (choice == 0) return Kinds.Intelligence;
                     if (choice == 1) return Kinds.Stealth;
                 }
                 else
                 {
-                    choice = random.Next(0, 2);
+                    choice = random.Next(0, 3);
                     if (choice == 0) return Kinds.Intelligence;
                     else if (choice == 1) return Kinds.Stealth;
                     else return Kinds.Strength;
@@ -96,7 +96,7 @@ namespace EpicRandomArena.Models
                 else if (Stealth.Points > Intelligence.Points) return Kinds.Stealth;
                 else
                 {
-                    choice = random.Next(0, 1);
+                    choice = random.Next(0, 2);
                     if (choice == 0) return Kinds.Intelligence;
                     if (choice == 1) return Kinds.Stealth;
                 }
@@ -107,7 +107,7 @@ namespace EpicRandomArena.Models
                 else if (Strength.Points > Stealth.Points) return Kinds.Strength;
                 else
                 {
-                    choice = random.Next(0, 1);
+                    choice = random.Next(0, 2);
                     if (choice == 0) return Kinds.Strength;
                     if (choice == 1) return Kinds.Stealth;
                 }
@@ -118,7 +118,7 @@ namespace EpicRandomArena.Models
                 else if (Strength.Points > Intelligence.Points) return Kinds.Strength;
                 else
                 {
-                    choice = random.Next(0, 1);
+                    choice = random.Next(0, 2);
                     if (choice == 0) return Kinds.Intelligence;
                     if (choice == 1) return Kinds.Strength;
                 }
@@ -137,25 +137,25 @@ namespace EpicRandomArena.Models
             else if (Diff(Strength) < Diff(Intelligence) && Diff(Strength) < Diff(Stealth)) return Kinds.Strength;
             else if (Diff(Intelligence) == Diff(Stealth) && Diff(Intelligence) < Diff(Strength))
             {
-                choice = random.Next(0, 1);
+                choice = random.Next(0, 2);
                 if (choice == 0) return Kinds.Intelligence;
                 if (choice == 1) return Kinds.Stealth;
             }
             else if (Diff(Stealth) == Diff(Strength) && Diff(Stealth) < Diff(Intelligence))
             {
-                choice = random.Next(0, 1);
+                choice = random.Next(0, 2);
                 if (choice == 0) return Kinds.Strength;
                 if (choice == 1) return Kinds.Stealth;
             }
             else if (Diff(Strength) == Diff(Intelligence) && Diff(Strength) < Diff(Stealth))
             {
-                choice = random.Next(0, 1);
+                choice = random.Next(0, 2);
                 if (choice == 0) return Kinds.Intelligence;
                 if (choice == 1) return Kinds.Strength;
             }
             else
             {
-                choice = random.Next(0, 2);
+                choice = random.Next(0, 3);
                 if (choice == 0) return Kinds.Intelligence;
                 else if (choice == 1) return Kinds.Stealth;
                 else return Kinds.Strength;
