@@ -186,6 +186,7 @@
     <Resource Include="Graphics\CardFolder\volodia.JPG" />
     <Resource Include="Graphics\CardFolder\dyiakonuk.jpg" />
     <Resource Include="Graphics\CardFolder\hapko.jpg" />
+    <Resource Include="Graphics\CardFolder\valik.JPG" />
     <Content Include="Music\Mortal Kombat Theme [Remix].mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

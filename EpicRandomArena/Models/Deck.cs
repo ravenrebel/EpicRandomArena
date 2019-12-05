@@ -21,7 +21,7 @@ namespace EpicRandomArena.Models
             //cards.Add(new Card("Arthas", "/EpicRandomArena;component/Graphics/CardFolder/arthas.jpg", 8, 13, 7));
             //cards.Add(new Card("Pudge", "/EpicRandomArena;component/Graphics/CardFolder/pudge.jpg", 2, 12, 1));
             //cards.Add(new Card("Invoker", "/EpicRandomArena;component/Graphics/CardFolder/invoker.jpg", 13, 3, 14));
-            //cards.Add(new Card("Valentin", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 15, 9, 6));
+            //cards.Add(new Card("Valentin", "/EpicRandomArena;component/Graphics/CardFolder/valik.JPG", 15, 9, 6));
             //cards.Add(new Card("Thor", "/EpicRandomArena;component/Graphics/CardFolder/thor.jpg", 4, 13, 5));
             //cards.Add(new Card("Geralt of Rivia", "/EpicRandomArena;component/Graphics/CardFolder/geralt.jpg", 10, 10, 9));
             //cards.Add(new Card("Saitama", "/EpicRandomArena;component/Graphics/CardFolder/saitama.gif", 3, 15, 4));
