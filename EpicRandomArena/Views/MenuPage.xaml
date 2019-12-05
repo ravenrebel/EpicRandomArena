@@ -7,28 +7,144 @@
         mc:Ignorable="d" 
         d:DesignHeight="720" d:DesignWidth="1280">
     <Page.Resources>
-        <Style x:Key="MenuBtn" TargetType="Button">
+        <Style x:Key="InfoMenuBtn" TargetType="Button">
             <Setter Property="FontFamily" Value="Muriad Pro" />
             <Setter Property="FontSize" Value="50" />
             <Setter Property="Height" Value="80"/>
             <Setter Property="MinWidth" Value="200"/>
             <Setter Property="MaxWidth" Value="500"/>
-            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="FontWeight" Value="DemiBold" />
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background">
+            <Setter Property="Template">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0, 1">
-                        <GradientStop Offset="0"/>
-                        <GradientStop Color="White" Offset="0.4"/>
-                        <GradientStop Color="White" Offset="0.5"/>
-                        <GradientStop Color="White" Offset="0.6"/>
-                        <GradientStop Offset="1" />
-                    </LinearGradientBrush>
+                    <ControlTemplate>
+                        <Border x:Name="Border" BorderThickness="2">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Offset="0"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.4"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.5"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.6"/>
+                                    <GradientStop Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="INFO" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Offset="0"/>
+                                            <GradientStop Color="White" Offset="0.4"/>
+                                            <GradientStop Color="White" Offset="0.5"/>
+                                            <GradientStop Color="White" Offset="0.6"/>
+                                            <GradientStop Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
         </Style>
+
+        <Style x:Key="PlayMenuBtn" TargetType="Button">
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="50" />
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="MinWidth" Value="200"/>
+            <Setter Property="MaxWidth" Value="500"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border" BorderThickness="2">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Offset="0"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.4"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.5"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.6"/>
+                                    <GradientStop Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="PLAY" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Offset="0"/>
+                                            <GradientStop Color="White" Offset="0.4"/>
+                                            <GradientStop Color="White" Offset="0.5"/>
+                                            <GradientStop Color="White" Offset="0.6"/>
+                                            <GradientStop Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="ExitMenuBtn" TargetType="Button">
+            <Setter Property="FontFamily" Value="Muriad Pro" />
+            <Setter Property="FontSize" Value="50" />
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="MinWidth" Value="200"/>
+            <Setter Property="MaxWidth" Value="500"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border" BorderThickness="2">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Offset="0"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.4"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.5"/>
+                                    <GradientStop Color="#dab8f0" Offset="0.6"/>
+                                    <GradientStop Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="EXIT" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Offset="0"/>
+                                            <GradientStop Color="White" Offset="0.4"/>
+                                            <GradientStop Color="White" Offset="0.5"/>
+                                            <GradientStop Color="White" Offset="0.6"/>
+                                            <GradientStop Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
     </Page.Resources>
     <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden">
         <Frame.Content>
@@ -50,9 +166,10 @@
                     <Label Foreground="White" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="72" Content="EPIC RANDOM ARENA"></Label>
                 </StackPanel>
                 <StackPanel Grid.Row="1" >
-                    <Button x:Name="PlayButton" Click="PlayButton_ClickAsync" Style="{StaticResource MenuBtn}">PLAY</Button>
-                    <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource MenuBtn}">INFO</Button>
-                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource MenuBtn}">EXIT</Button>
+                    <Button x:Name="PlayButton" Click="PlayButton_ClickAsync" Content="PLAY" Style="{StaticResource PlayMenuBtn}"/>
+                    <Button x:Name="InfoButton" Click="InfoButton_Click" Style="{StaticResource InfoMenuBtn}" />
+                    <Button x:Name="ExitButton" Click="ExitButton_Click" Style="{StaticResource ExitMenuBtn}">
+                    </Button>
                 </StackPanel>
             </Grid>   
         </Frame.Content>
