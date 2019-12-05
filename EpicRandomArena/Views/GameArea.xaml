@@ -26,6 +26,21 @@
         </Style>
         <Style x:Key="OpponentCardStyle" TargetType="StackPanel" BasedOn="{StaticResource CardStyle}">
             <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}" Value="1">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" FillBehavior="Stop"
+                                                               Duration="0:0:2">
+                                    <LinearDoubleKeyFrame KeyTime="0%" Value="0" />
+                                    <LinearDoubleKeyFrame KeyTime="100%" Value="0" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="PlDeckCountStyle" TargetType="Label">
@@ -520,7 +535,7 @@
 
         <!-- Канва з карточкою бота повністю -->
 
-        <StackPanel Grid.Column="3" Grid.Row="0" VerticalAlignment="Center">
+        <StackPanel Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
             <StackPanel Style="{StaticResource OpponentCardStyle}" >
 
                 <StackPanel x:Name="OpponentTtlCrd">
@@ -557,7 +572,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel  Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel  Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
             <Rectangle Width="144" Height="256">
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
@@ -668,7 +683,7 @@
         </StackPanel>
 
         <!-- Канва з карточкою гравця повністю -->
-        <StackPanel Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">
             
             <StackPanel Style="{StaticResource PlayerCardStyle}" >
                 <!--  -->
@@ -710,6 +725,36 @@
             </StackPanel>
             
         </StackPanel>
+        
+        <StackPanel  Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Rectangle Width="144" Height="256">
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}" Value="1">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}" Value="-1">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}" Value="2">
+                                <Setter Property="Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="true">
+                                <Setter Property="Visibility" Value="Hidden"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="false">
+                                <Setter Property="Visibility" Value="Hidden"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/BackCard.png"/>
+                </Rectangle.Fill>  
+            </Rectangle>
+        </StackPanel>
+
         
         
         <!-- Кнопки виходу/черги бота -->
@@ -781,7 +826,15 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate>
-                                    <Border x:Name="Border">
+                                    <Border x:Name="Border" Width="150">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0, 1">
+                                                <GradientStop Color="#dab8f0" Offset="0"/>
+                                                <GradientStop Color="White" Offset="0.45"/>
+                                                <GradientStop Color="White" Offset="0.55"/>
+                                                <GradientStop Color="#dab8f0" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
                                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Source={StaticResource viewmodel}, Path=SelectedAttribute}" RecognizesAccessKey="True"/>
                                     </Border>
                                     <ControlTemplate.Triggers>

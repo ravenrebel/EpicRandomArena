@@ -156,7 +156,7 @@
     <Resource Include="Graphics\StrSymbol.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Graphics\CardFolder\Ilona.png" />
+    <Resource Include="Graphics\CardFolder\ilona.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Graphics\logo.png" />
@@ -188,6 +188,8 @@
     <Resource Include="Graphics\CardFolder\dyiakonuk.jpg" />
     <Resource Include="Graphics\CardFolder\hapko.jpg" />
     <Resource Include="Graphics\CardFolder\valik.JPG" />
+    <Resource Include="Graphics\CardFolder\truhan.png" />
+    <Resource Include="Graphics\CardFolder\yashchuk.jpg" />
     <Content Include="Music\Mortal Kombat Theme [Remix].mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
