@@ -29,10 +29,10 @@ namespace EpicRandomArena.Models
             //cards.Add(new Card("Volodia", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 11, 7, 10));
             //cards.Add(new Card("Olia", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 6, 3, 11));
             //cards.Add(new Card("Diakoniuk", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 5, 4, 13));
-            //cards.Add(new Card("Iashchuk Xandrovich", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 7, 5, 13));
+            //cards.Add(new Card("Iashchuk", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 7, 5, 13));
             //cards.Add(new Card("Loki", "/EpicRandomArena;component/Graphics/CardFolder/loki.jpg", 14, 4, 8));
             //cards.Add(new Card("Hapko", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 7, 2, 13));
-            //cards.Add(new Card("Half of Truhan", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 1, 4, 8));
+            cards.Add(new Card("Half of Truhan", "/EpicRandomArena;component/Graphics/CardFolder/Ilona.png", 1, 4, 8));
         }
 
         public int Count() => cards.Count();

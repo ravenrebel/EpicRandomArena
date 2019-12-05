@@ -481,8 +481,8 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
-                                                               Duration="0:0:1">
-                                    <LinearDoubleKeyFrame KeyTime="99%" Value="0" />
+                                                               Duration="0:0:1.5">
+                                    <LinearDoubleKeyFrame KeyTime="89%" Value="0" />
                                     <LinearDoubleKeyFrame KeyTime="100%" Value="1" />
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
@@ -562,6 +562,54 @@
                 <Rectangle.Style>
                     <Style TargetType="Rectangle">
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}" Value="1">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation
+                                                    Storyboard.TargetProperty="Margin" Duration="0:0:2" FillBehavior="Stop"
+                                                    To="200, 0, 0, 0"/>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" FillBehavior="Stop"
+                                                               Duration="0:0:2">
+                                                <LinearDoubleKeyFrame KeyTime="0%" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="70%" Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="100%" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                            <!--<DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}" Value="-1">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation
+                                                    Storyboard.TargetProperty="Margin" Duration="0:0:2" FillBehavior="Stop"
+                                                    To="0, 0, 0, 100"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>-->
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=PlayerPositiveTurnResult}"
+                                         Value="2">
+                   
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation
+                                                    Storyboard.TargetProperty="Margin" Duration="0:0:2" FillBehavior="Stop"
+                                                    To="200, 0, 0, 0"/>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" FillBehavior="Stop"
+                                                               
+                                                               Duration="0:0:2">
+                                                <LinearDoubleKeyFrame KeyTime="0%" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="70%" Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="100%" Value="0" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn}" Value="true">
                                 <Setter Property="Visibility" Value="Visible"></Setter>
                             </DataTrigger>
@@ -573,8 +621,10 @@
                 </Rectangle.Style>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/BackCard.png"/>
-                </Rectangle.Fill>
+                </Rectangle.Fill>  
+               
             </Rectangle>
+          
         </StackPanel>
 
         <StackPanel Grid.Column="5" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -723,7 +773,7 @@
                 <Label.Style>
                     <Style TargetType="Label">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=TurnStart, UpdateSourceTrigger=PropertyChanged}"
+                            <DataTrigger Binding="{Binding Source={StaticResource viewmodel}, Path=IsYourTurn, UpdateSourceTrigger=PropertyChanged}"
                                      Value="true">
                                 <Setter Property="Visibility" Value="Hidden"/>
                             </DataTrigger>
