@@ -6,12 +6,20 @@
       xmlns:local="clr-namespace:EpicRandomArena.Views"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="LoadingPage">
-    <Grid Background="#6a2a">
-        <Label Height="400" Width="600">
-            <Label.Background>
-                <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/logo.png"/>
-            </Label.Background>
-        </Label>
+      Title="LoadingPage"
+      Background="Black">
+    <Grid>
+        <Canvas Height="200" Width="100" x:Name="SpinnerCanvas" RenderTransformOrigin=".5,.5">
+            <Canvas.RenderTransform>
+                <RotateTransform x:Name="Spin" Angle="0"/>
+            </Canvas.RenderTransform>
+        </Canvas>
+        <Label Content="Loading..." 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Bottom"
+               Margin="50"
+               FontFamily="Muriad Pro"
+               FontSize="50"
+               Foreground="White"/>
     </Grid>
 </Page>
