@@ -6,6 +6,93 @@
       xmlns:local="clr-namespace:EpicRandomArena.Views"
       mc:Ignorable="d"
       d:DesignWidth="1280" d:DesignHeight="720">
+
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="HistoryButton">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5 0 0 -5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border" CornerRadius="10">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Color="#dab8f0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.45"/>
+                                    <GradientStop Color="White" Offset="0.55"/>
+                                    <GradientStop Color="#dab8f0" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="HISTORY" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Color="White" Offset="0"/>
+                                            <GradientStop Color="#dab8f0" Offset="0.45"/>
+                                            <GradientStop Color="#dab8f0" Offset="0.55"/>
+                                            <GradientStop Color="White" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="RulesButton">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="2 0 0 -5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border x:Name="Border" CornerRadius="10">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0, 1">
+                                    <GradientStop Color="#dab8f0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.45"/>
+                                    <GradientStop Color="White" Offset="0.55"/>
+                                    <GradientStop Color="#dab8f0" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="RULES" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter TargetName="Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0, 1">
+                                            <GradientStop Color="White" Offset="0"/>
+                                            <GradientStop Color="#dab8f0" Offset="0.45"/>
+                                            <GradientStop Color="#dab8f0" Offset="0.55"/>
+                                            <GradientStop Color="White" Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/EpicRandomArena;component/Graphics/Info.png"/>
@@ -18,12 +105,26 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" MaxHeight="100"/>
             <RowDefinition Height="8*" MinHeight="200"/>
-            <RowDefinition Height="*" MaxHeight="100"/>
+            <RowDefinition Height="0.5*" MaxHeight="100" MinHeight="50"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" CanVerticallyScroll="True" VerticalAlignment="Center"  >
-            <TextBlock FontSize="48" Foreground="AliceBlue" TextWrapping="WrapWithOverflow" Text="Not a long time ago in a galaxy not very far away, scientists were searching for the Higgs boson. The Large Hadron Collider generated a large number of small black holes that became portals to many parallel Universes. This is how humanity met with foreigners and the First Universes War began. Heroes and villains made their choice: peaceful coexistence or the struggle for resources.">
-            </TextBlock>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <Button Style="{StaticResource HistoryButton}" Click="Button_Click">History</Button>
+            <Button Style="{StaticResource RulesButton}" Click="Button_Click_1">Rules</Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" CanVerticallyScroll="True">
+            <TextBox x:Name="TextInfo" IsEnabled="False" Opacity="100" Foreground="Black" FontSize="48" VerticalAlignment="Top" BorderThickness="5" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" Text="Not a long time ago in a galaxy not very far away, scientists were searching for the Higgs boson. The Large Hadron Collider generated a large number of small black holes that became portals to many parallel Universes. This is how humanity met with foreigners and the First Universes War began. Heroes and villains made their choice: peaceful coexistence or the struggle for resources." BorderBrush="#FF001246">
+                <TextBox.Background>
+                        <LinearGradientBrush StartPoint="0,-1">
+                            <GradientStop Color="#dab8f0" Offset="0"/>
+                            <GradientStop Color="White" Offset="0.25"/>
+                            <GradientStop Color="#dab8f0" Offset="0.5"/>
+                            <GradientStop Color="White" Offset="0.75"/>
+                            <GradientStop Color="#dab8f0" Offset="1" />
+                        </LinearGradientBrush>
+                </TextBox.Background>
+            </TextBox>
         </StackPanel>
         
         <StackPanel Grid.Row="0" Grid.Column="2">
@@ -48,6 +149,11 @@
                     </Style>
                 </Button.Style>
             </Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" >
+            <Label HorizontalContentAlignment="Right" Content="developed by Anastasia Baklayeva &amp; Ilona Girnyk" Foreground="White" MinWidth="600"/>
+            <Label HorizontalContentAlignment="Right" Content="Copyright &#9400; 2019" Foreground="White" MinWidth="400"/>
         </StackPanel>
     </Grid>
 </Page>
