@@ -132,22 +132,25 @@ namespace EpicRandomArena.Models
         {
             Random random = new Random();
             int choice;
-            if (Diff(Intelligence) < Diff(Stealth) && Diff(Intelligence) < Diff(Strength)) return Kinds.Intelligence;
-            else if (Diff(Stealth) < Diff(Intelligence) && Diff(Stealth) < Diff(Strength)) return Kinds.Stealth;
-            else if (Diff(Strength) < Diff(Intelligence) && Diff(Strength) < Diff(Stealth)) return Kinds.Strength;
-            else if (Diff(Intelligence) == Diff(Stealth) && Diff(Intelligence) < Diff(Strength))
+            int diffIntelligence = Diff(Intelligence);
+            int diffStealth = Diff(Stealth);
+            int diffStrength = Diff(Strength);
+            if (diffIntelligence < diffStealth && diffIntelligence < diffStealth) return Kinds.Intelligence;
+            else if ( diffStealth < diffIntelligence && diffStealth < diffStrength) return Kinds.Stealth;
+            else if (diffStrength < diffIntelligence && diffStrength < diffStealth) return Kinds.Strength;
+            else if (diffIntelligence == diffStealth && diffIntelligence < diffStrength)
             {
                 choice = random.Next(0, 2);
                 if (choice == 0) return Kinds.Intelligence;
                 if (choice == 1) return Kinds.Stealth;
             }
-            else if (Diff(Stealth) == Diff(Strength) && Diff(Stealth) < Diff(Intelligence))
+            else if (diffStealth == diffStrength && diffStealth < diffIntelligence)
             {
                 choice = random.Next(0, 2);
                 if (choice == 0) return Kinds.Strength;
                 if (choice == 1) return Kinds.Stealth;
             }
-            else if (Diff(Strength) == Diff(Intelligence) && Diff(Strength) < Diff(Stealth))
+            else if (diffStrength == diffIntelligence && diffStrength < diffStealth)
             {
                 choice = random.Next(0, 2);
                 if (choice == 0) return Kinds.Intelligence;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace EpicRandomArena.Models
@@ -16,13 +13,13 @@ namespace EpicRandomArena.Models
             cards.Add(new Card("Ilona", "/EpicRandomArena;component/Graphics/CardFolder/ilona.png", 9, 4, 11));
             cards.Add(new Card("Anastasia", "/EpicRandomArena;component/Graphics/CardFolder/nastya.jpg", 9, 1, 12));
             cards.Add(new Card("Tony Stark", "/EpicRandomArena;component/Graphics/CardFolder/tony_stark.jpg", 11, 5, 15));
-            cards.Add(new Card("Batman", "/EpicRandomArena;component/Graphics/CardFolder/batman.jpg", 12, 10, 6));
+            cards.Add(new Card("Batman", "/EpicRandomArena;component/Graphics/CardFolder/batman.jpg", 12, 9, 6));
             cards.Add(new Card("Darth Vader", "/EpicRandomArena;component/Graphics/CardFolder/darth_vader.jpg", 4, 14, 2));
             cards.Add(new Card("Arthas", "/EpicRandomArena;component/Graphics/CardFolder/arthas.jpg", 8, 13, 7));
             cards.Add(new Card("Pudge", "/EpicRandomArena;component/Graphics/CardFolder/pudge.jpg", 2, 12, 1));
             cards.Add(new Card("Invoker", "/EpicRandomArena;component/Graphics/CardFolder/invoker.jpg", 13, 3, 14));
-            cards.Add(new Card("Valentin", "/EpicRandomArena;component/Graphics/CardFolder/valik.JPG", 15, 9, 6));
-            cards.Add(new Card("Thor", "/EpicRandomArena;component/Graphics/CardFolder/thor.jpg", 4, 13, 5));
+            cards.Add(new Card("Valentin", "/EpicRandomArena;component/Graphics/CardFolder/valik.JPG", 15, 8, 6));
+            cards.Add(new Card("Thor", "/EpicRandomArena;component/Graphics/CardFolder/thor.jpg", 4, 12, 5));
             cards.Add(new Card("Geralt of Rivia", "/EpicRandomArena;component/Graphics/CardFolder/geralt.jpg", 10, 10, 9));
             cards.Add(new Card("Saitama", "/EpicRandomArena;component/Graphics/CardFolder/saitama.gif", 3, 15, 4));
             cards.Add(new Card("Elon Mask", "/EpicRandomArena;component/Graphics/CardFolder/elon_mask.jpg", 10, 6, 14));
