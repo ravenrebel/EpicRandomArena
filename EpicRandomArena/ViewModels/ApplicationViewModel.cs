@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using static EpicRandomArena.Models.Attribute;
 
 namespace EpicRandomArena.ViewModels
@@ -24,6 +25,7 @@ namespace EpicRandomArena.ViewModels
 
         private bool isYourTurn;
         private bool isBotTurn;
+        private bool isTurnStart = true;
 
         private int playerPositiveTurnResult = 0;
         private bool playerVictory = false;
@@ -293,7 +295,16 @@ namespace EpicRandomArena.ViewModels
                 OnPropertyChanged("DroppedCardsExist");
             }
         }
-       /// 
+        public bool IsTurnStart
+        {
+            get => isTurnStart;
+            set
+            {
+                isTurnStart = value;
+                OnPropertyChanged("IsTurnStart");
+            }
+        }
+        /// 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -319,6 +330,7 @@ namespace EpicRandomArena.ViewModels
                         else SelectedAttribute =Kinds.Intelligence;
 
                         IsYourTurn = false;
+                        IsTurnStart = false;
                     }));
             }
         }
@@ -331,6 +343,7 @@ namespace EpicRandomArena.ViewModels
                 return botSelectCommand ??
                     (botSelectCommand = new RelayCommand(obj =>
                     {
+                        IsTurnStart = true;
                         if (isBotTurn == true)
                         {
                             TurnResult();
@@ -425,7 +438,7 @@ namespace EpicRandomArena.ViewModels
             catch (NullReferenceException)
             {
             }
-    }
+        }
 
         private Kinds AIChoice()
         {
@@ -495,6 +508,9 @@ namespace EpicRandomArena.ViewModels
             OpponentCardIntelligenceLevel = opponentDeck[0].Intelligence.Level;
             OpponentCardStealthLevel = opponentDeck[0].Stealth.Level;
             OpponentCardStrengthLevel = opponentDeck[0].Strength.Level;
+
+            IsTurnStart = false;
+            Thread.Sleep(1500);
         }
     }
 }
