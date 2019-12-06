@@ -32,5 +32,15 @@ namespace EpicRandomArena.Views
             ExitGameWindow exitGameWindow = new ExitGameWindow(Window.GetWindow(this));
             exitGameWindow.Show();
         }
+
+        private void Condition_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NextTurnButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
